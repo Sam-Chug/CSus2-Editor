@@ -15,7 +15,7 @@ namespace CSus2Editor
     {
 
         //Get help text from file
-        string helpText = System.IO.File.ReadAllText(@".\res\Help.txt");
+        string helpText = System.IO.File.ReadAllText(@".\Readme.txt");
 
         public helpWindow()
         {
