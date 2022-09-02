@@ -65,7 +65,8 @@ namespace CSus2Editor
             // 
             // tb_noteSequence
             // 
-            this.tb_noteSequence.Location = new System.Drawing.Point(4, 442);
+            this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_noteSequence.Location = new System.Drawing.Point(4, 449);
             this.tb_noteSequence.Name = "tb_noteSequence";
             this.tb_noteSequence.Size = new System.Drawing.Size(466, 25);
             this.tb_noteSequence.TabIndex = 7;
@@ -76,9 +77,10 @@ namespace CSus2Editor
             // 
             this.lbl_UINoteSequence.AutoSize = true;
             this.lbl_UINoteSequence.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_UINoteSequence.Location = new System.Drawing.Point(4, 424);
+            this.lbl_UINoteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_UINoteSequence.Location = new System.Drawing.Point(4, 429);
             this.lbl_UINoteSequence.Name = "lbl_UINoteSequence";
-            this.lbl_UINoteSequence.Size = new System.Drawing.Size(212, 15);
+            this.lbl_UINoteSequence.Size = new System.Drawing.Size(227, 17);
             this.lbl_UINoteSequence.TabIndex = 2;
             this.lbl_UINoteSequence.Text = "Note Sequence - Click to copy to clipboard";
             // 
@@ -86,22 +88,24 @@ namespace CSus2Editor
             // 
             this.lbl_UISetSongLength.AutoSize = true;
             this.lbl_UISetSongLength.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_UISetSongLength.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UISetSongLength.Location = new System.Drawing.Point(4, 378);
             this.lbl_UISetSongLength.Name = "lbl_UISetSongLength";
-            this.lbl_UISetSongLength.Size = new System.Drawing.Size(89, 15);
+            this.lbl_UISetSongLength.Size = new System.Drawing.Size(93, 17);
             this.lbl_UISetSongLength.TabIndex = 3;
             this.lbl_UISetSongLength.Text = "Set Song Length";
             // 
             // nud_seqLength
             // 
-            this.nud_seqLength.Location = new System.Drawing.Point(4, 396);
+            this.nud_seqLength.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_seqLength.Location = new System.Drawing.Point(4, 398);
             this.nud_seqLength.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nud_seqLength.Name = "nud_seqLength";
-            this.nud_seqLength.Size = new System.Drawing.Size(89, 20);
+            this.nud_seqLength.Size = new System.Drawing.Size(93, 23);
             this.nud_seqLength.TabIndex = 1;
             this.nud_seqLength.Value = new decimal(new int[] {
             16,
@@ -112,9 +116,10 @@ namespace CSus2Editor
             // 
             // btn_generateNew
             // 
-            this.btn_generateNew.Location = new System.Drawing.Point(95, 377);
+            this.btn_generateNew.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_generateNew.Location = new System.Drawing.Point(99, 377);
             this.btn_generateNew.Name = "btn_generateNew";
-            this.btn_generateNew.Size = new System.Drawing.Size(46, 40);
+            this.btn_generateNew.Size = new System.Drawing.Size(62, 45);
             this.btn_generateNew.TabIndex = 2;
             this.btn_generateNew.Text = "New Sheet";
             this.btn_generateNew.UseVisualStyleBackColor = true;
@@ -124,22 +129,24 @@ namespace CSus2Editor
             // 
             this.label1.AutoSize = true;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(319, 378);
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(310, 378);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 15);
+            this.label1.Size = new System.Drawing.Size(99, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Interval (30/sec)";
             // 
             // nud_noteInterval
             // 
-            this.nud_noteInterval.Location = new System.Drawing.Point(319, 396);
+            this.nud_noteInterval.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_noteInterval.Location = new System.Drawing.Point(310, 398);
             this.nud_noteInterval.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nud_noteInterval.Name = "nud_noteInterval";
-            this.nud_noteInterval.Size = new System.Drawing.Size(87, 20);
+            this.nud_noteInterval.Size = new System.Drawing.Size(99, 23);
             this.nud_noteInterval.TabIndex = 5;
             this.nud_noteInterval.Value = new decimal(new int[] {
             5,
@@ -149,11 +156,12 @@ namespace CSus2Editor
             // 
             // btn_seqUpdate
             // 
-            this.btn_seqUpdate.Location = new System.Drawing.Point(473, 441);
+            this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_seqUpdate.Location = new System.Drawing.Point(473, 448);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
             this.btn_seqUpdate.Size = new System.Drawing.Size(80, 27);
             this.btn_seqUpdate.TabIndex = 8;
-            this.btn_seqUpdate.Text = "Update";
+            this.btn_seqUpdate.Text = "Generate";
             this.btn_seqUpdate.UseVisualStyleBackColor = true;
             this.btn_seqUpdate.Click += new System.EventHandler(this.clickUpdate);
             // 
@@ -168,9 +176,10 @@ namespace CSus2Editor
             // 
             // btn_playSong
             // 
-            this.btn_playSong.Location = new System.Drawing.Point(467, 377);
+            this.btn_playSong.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_playSong.Location = new System.Drawing.Point(468, 377);
             this.btn_playSong.Name = "btn_playSong";
-            this.btn_playSong.Size = new System.Drawing.Size(85, 40);
+            this.btn_playSong.Size = new System.Drawing.Size(85, 45);
             this.btn_playSong.TabIndex = 6;
             this.btn_playSong.Text = "Play Song";
             this.btn_playSong.UseVisualStyleBackColor = true;
@@ -179,7 +188,7 @@ namespace CSus2Editor
             // lbl_UIHLine2
             // 
             this.lbl_UIHLine2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_UIHLine2.Location = new System.Drawing.Point(-1, 419);
+            this.lbl_UIHLine2.Location = new System.Drawing.Point(-1, 424);
             this.lbl_UIHLine2.Name = "lbl_UIHLine2";
             this.lbl_UIHLine2.Size = new System.Drawing.Size(600, 2);
             this.lbl_UIHLine2.TabIndex = 11;
@@ -227,7 +236,7 @@ namespace CSus2Editor
             // options_timeSignature
             // 
             this.options_timeSignature.Name = "options_timeSignature";
-            this.options_timeSignature.Size = new System.Drawing.Size(153, 22);
+            this.options_timeSignature.Size = new System.Drawing.Size(180, 22);
             this.options_timeSignature.Text = "Time Signature";
             this.options_timeSignature.Click += new System.EventHandler(this.clickTimeSignature);
             // 
@@ -257,22 +266,24 @@ namespace CSus2Editor
             // lbl_UIAddColumns
             // 
             this.lbl_UIAddColumns.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_UIAddColumns.Location = new System.Drawing.Point(147, 378);
+            this.lbl_UIAddColumns.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_UIAddColumns.Location = new System.Drawing.Point(167, 378);
             this.lbl_UIAddColumns.Name = "lbl_UIAddColumns";
-            this.lbl_UIAddColumns.Size = new System.Drawing.Size(89, 15);
+            this.lbl_UIAddColumns.Size = new System.Drawing.Size(74, 17);
             this.lbl_UIAddColumns.TabIndex = 13;
             this.lbl_UIAddColumns.Text = "Add Columns";
             // 
             // nud_addColumns
             // 
-            this.nud_addColumns.Location = new System.Drawing.Point(147, 396);
+            this.nud_addColumns.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_addColumns.Location = new System.Drawing.Point(167, 398);
             this.nud_addColumns.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nud_addColumns.Name = "nud_addColumns";
-            this.nud_addColumns.Size = new System.Drawing.Size(89, 20);
+            this.nud_addColumns.Size = new System.Drawing.Size(74, 23);
             this.nud_addColumns.TabIndex = 3;
             this.nud_addColumns.Value = new decimal(new int[] {
             1,
@@ -283,9 +294,10 @@ namespace CSus2Editor
             // 
             // btn_addColumns
             // 
-            this.btn_addColumns.Location = new System.Drawing.Point(238, 377);
+            this.btn_addColumns.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addColumns.Location = new System.Drawing.Point(243, 377);
             this.btn_addColumns.Name = "btn_addColumns";
-            this.btn_addColumns.Size = new System.Drawing.Size(75, 40);
+            this.btn_addColumns.Size = new System.Drawing.Size(61, 45);
             this.btn_addColumns.TabIndex = 4;
             this.btn_addColumns.Text = "Add Columns";
             this.btn_addColumns.UseVisualStyleBackColor = true;
@@ -294,18 +306,18 @@ namespace CSus2Editor
             // lbl_UIVLine1
             // 
             this.lbl_UIVLine1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_UIVLine1.Location = new System.Drawing.Point(143, 374);
+            this.lbl_UIVLine1.Location = new System.Drawing.Point(163, 374);
             this.lbl_UIVLine1.Name = "lbl_UIVLine1";
-            this.lbl_UIVLine1.Size = new System.Drawing.Size(2, 47);
+            this.lbl_UIVLine1.Size = new System.Drawing.Size(2, 51);
             this.lbl_UIVLine1.TabIndex = 17;
             this.lbl_UIVLine1.Text = "label2";
             // 
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(315, 374);
+            this.label2.Location = new System.Drawing.Point(306, 374);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(2, 47);
+            this.label2.Size = new System.Drawing.Size(2, 51);
             this.label2.TabIndex = 18;
             this.label2.Text = "label2";
             // 
@@ -321,11 +333,12 @@ namespace CSus2Editor
             // loopCheckbox
             // 
             this.loopCheckbox.AutoSize = true;
-            this.loopCheckbox.Location = new System.Drawing.Point(416, 378);
-            this.loopCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loopCheckbox.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loopCheckbox.Location = new System.Drawing.Point(419, 378);
+            this.loopCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.loopCheckbox.Name = "loopCheckbox";
             this.loopCheckbox.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.loopCheckbox.Size = new System.Drawing.Size(50, 18);
+            this.loopCheckbox.Size = new System.Drawing.Size(50, 20);
             this.loopCheckbox.TabIndex = 19;
             this.loopCheckbox.Text = "Loop";
             this.loopCheckbox.UseVisualStyleBackColor = true;
@@ -334,9 +347,9 @@ namespace CSus2Editor
             // label3
             // 
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Location = new System.Drawing.Point(409, 374);
+            this.label3.Location = new System.Drawing.Point(412, 374);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(2, 47);
+            this.label3.Size = new System.Drawing.Size(2, 51);
             this.label3.TabIndex = 20;
             this.label3.Text = "label3";
             // 
@@ -344,7 +357,7 @@ namespace CSus2Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 471);
+            this.ClientSize = new System.Drawing.Size(556, 478);
             this.Controls.Add(this.lbl_UIHLine2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.loopCheckbox);
@@ -367,7 +380,7 @@ namespace CSus2Editor
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(570, 471);
+            this.MinimumSize = new System.Drawing.Size(572, 517);
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csus2 Music Box Editor";
