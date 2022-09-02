@@ -2,7 +2,7 @@
 Created By: Reaganomics Lamborghini
 
 ==Song Length==
-Selected the length of the sequence by changing the value in Song Length Box. Beware that lengths larger than ~50 may cause the program to lag upon resizing. After selecting new length, click "Generate New Sheet" to apply the length. Generating a new sheet will clear all previous notes. The sequence length is currently capped at 100 notes for instability reasons.
+Selected the length of the sequence by changing the value in Song Length Box. Beware that lengths larger than ~100 may cause the program to lag upon resizing. After selecting new length, click "Generate New Sheet" to apply the length. Generating a new sheet will clear all previous notes. The sequence length is currently capped at 250 notes for instability reasons.
 
 
 ==Add Columns==
