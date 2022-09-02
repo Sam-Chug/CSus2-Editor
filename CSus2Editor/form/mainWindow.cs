@@ -196,7 +196,12 @@ namespace CSus2Editor
                 // Stop the song and reset the currently playing note's color.
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
-                noteCols[songNote].setColorRTB(beatColor(songNote));
+                if (songNote == 0) {
+                    // The "previous note" is the final one.
+                    noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+                } else {
+                    noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                }
                 return;
             }
 
@@ -271,16 +276,16 @@ namespace CSus2Editor
                 btn_playSong.Text = PLAY_SONG_TEXT;
             }
 
-            //Test var
-            int testEmpty = 0;
+            bool restEmpty = true;
 
             //For the rest of the song
-            for (int i = 0; i < indexList.Length - songNote; i++)
+            for (int i = songNote; i < indexList.Length; i++)
             {
                 //Check following notes if empty
-                testEmpty += indexList[songNote + i];
+                restEmpty &= (indexList[i] == 0);
             }
-            if(testEmpty == 0) //If all following notes empty, end song early
+
+            if (restEmpty && !loopCheckbox.Checked) //If all following notes empty, end song early
             {
                 //Force back to default
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
