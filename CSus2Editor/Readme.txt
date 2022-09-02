@@ -2,7 +2,7 @@
 Created By: Reaganomics Lamborghini
 
 ==Song Length==
-Selected the length of the sequence by changing the value in Song Length Box. Beware that lengths larger than ~100 may cause the program to lag upon resizing. After selecting new length, click "Generate New Sheet" to apply the length. Generating a new sheet will clear all previous notes. The sequence length is currently capped at 250 notes for instability reasons.
+Select the length of the sequence by changing the value in Song Length Box. Beware that lengths larger than ~100 may cause the program to lag upon resizing. After selecting new length, click "Generate New Sheet" to apply the length. Generating a new sheet will clear all previous notes. The sequence length is currently capped at 250 notes for instability reasons.
 
 
 ==Add Columns==
@@ -20,7 +20,7 @@ Clicking the "Loop" check box will loop your sequence until you hit the "Stop So
 
 
 ==Note Sequencer==
-Each column represents each note the music box can play. The note displayed on each button is different from FreeSO, because FreeSO's notes do not match up with the real-life notation. However, the program will still output FreeSO's notation. This is only so that it's easier to transcript notes based on real life material. If you want to clear a column, click on the "Clr." button.
+Each column represents each note the music box can play. The note displayed on each button is different from FreeSO, because FreeSO's notes do not match up with the real-life notation. However, the program will still output FreeSO's notation. This is only so that it's easier to transcript notes based on real life material.
 
 
 ==Copy Note Sequence==
@@ -28,7 +28,7 @@ At the bottom of the window, you will see an empty text box. To fill the textbox
 
 
 ==Loading Note Sequence==
-CLicking "Load Sequence" under the "File" menu button will open a prompt asking for a sequence. Paste your note sequence in the text box and press the enter key, and your song will be loaded into the editor. Beware, only sequences that follow this program's output format will work!
+Clicking "Load Sequence" under the "File" menu button will open a prompt asking for a sequence. Paste your note sequence in the text box and press the enter key, and your song will be loaded into the editor. Beware, only sequences that follow this program's output format will work!
 
 
 ==Tips==
