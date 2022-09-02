@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace CSus2Editor
 {
@@ -70,39 +71,72 @@ namespace CSus2Editor
         //This whole thing is sus
         public void drawCrewmate(bool alive)
         {
-
+            //Check for draw cremate option
             if (!mainWindow.drawCremate) return;
 
             //Generate crewmate at note
             if (alive)
             {
+                //If no notes, skip drawing - workaround for getting stuck in loop
+                if (mainWindow.indexList.Sum() == 0) return;
+
                 //New crewmate
                 Crewmate crewmate = new Crewmate();
                 pnl_Buttons.Controls.Add(crewmate);
+                crewmate.BackColor = Color.LightGreen;
 
                 int crewmateY = mainWindow.indexList[index];
+
+                //Check if drawing empty note crewmates is enabled
+                if (!mainWindow.drawCrewmateEmpty) goto EndFor;
+
+                //Workaround for weird behavior at index 0
+                if(index == 0 && mainWindow.indexList[index] == 0)
+                {
+                    for (int i = mainWindow.indexList.Length - 1; i-- > 0;)
+                    {
+                        if(mainWindow.indexList[i] != 0)
+                        {
+                            //Set Y to last value in indexlist
+                            crewmateY = mainWindow.indexList[i];
+                            crewmate.BackColor = Color.LemonChiffon;
+                            goto EndFor;
+                        }
+                    }
+                }
 
                 //Backwards search to find first non-null note
                 if (mainWindow.indexList[index] == 0)
                 {
-                    for (int i = (mainWindow.indexList[index] - (mainWindow.indexList[index] - index)); i-- > 0;)
+                    for (int i = (mainWindow.indexList[index] - (mainWindow.indexList[index] - index)); i--> 0;)
                     {
                         //Set crewmate location to last non-null note
                         if (mainWindow.indexList[i] != 0)
                         {
                             crewmateY = mainWindow.indexList[i];
+                            crewmate.BackColor = Color.LemonChiffon;
                             goto EndFor;
                         }
+                        if(i == 0)
+                        {
+                            i = mainWindow.indexList.Length;
+                        }
                     }
-                }EndFor: int endFor;
+                }
+                EndFor: int endFor;
 
-                //Set location to note index
+                //Set min Y
+                crewmateY = Math.Min(crewmateY, 7);
+                
+                //Skip empty note drawing if option disabled
+                if (!mainWindow.drawCrewmateEmpty && crewmateY == 0) return;
+
+                //Set location to note index and bring to front
                 crewmate.Location = new Point(0, ((8 - crewmateY) * 36) + 9);
-                //Bring to front
                 crewmate.BringToFront();
             }
 
-            //Kill crewmate after note
+            //Kill crewmate after note passed
             else
             {
                 //Find crewmate in vents

@@ -21,7 +21,7 @@ namespace CSus2Editor
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 
             Size = new Size(36, 36);
-            BackColor = Color.LightGoldenrodYellow;
+            BackColor = Color.LightGreen;
             
         }
     }

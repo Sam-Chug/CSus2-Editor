@@ -10,9 +10,10 @@ namespace CSus2Editor
 {
     public partial class mainWindow
     {
-
         bool firstNote = true;
+        public static bool measureLines = true;
         public static bool drawCremate = true;
+        public static bool drawCrewmateEmpty = false;
 
         //On clicking about under help
         private void clickAbout(object sender, EventArgs e)
@@ -62,7 +63,6 @@ namespace CSus2Editor
         //Option to play from first note or from beginning of sequence
         private void clickFirstNote(object sender, EventArgs e)
         {
-
             firstNote ^= true;
             options_firstNote.Checked = firstNote;
 
@@ -71,10 +71,28 @@ namespace CSus2Editor
         //Option to draw crewmate when playing song
         private void clickCrewmate(object sender, EventArgs e)
         {
-
             drawCremate ^= true;
             options_showCrewmate.Checked = drawCremate;
 
         }//End clickCrewmate
+
+        //Option to show measure lines on the sequencer
+        private void clickMeasureLines(object sender, EventArgs e)
+        {
+            measureLines ^= true;
+            options_measureLines.Checked = measureLines;
+
+            //Refresh column colors
+            refreshColumns();
+
+        }//End clickMeasureLines
+
+        //Option to draw crewmates on empty notes
+        private void clickCMDrawEmpty(object sender, EventArgs e)
+        {
+            drawCrewmateEmpty ^= true;
+            cm_drawEmpty.Checked = drawCrewmateEmpty;
+
+        }//End clickCMDrawEmpty
     }
 }

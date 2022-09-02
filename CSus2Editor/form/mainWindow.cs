@@ -8,6 +8,7 @@ using System.IO;
 using System.CodeDom.Compiler;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Reflection;
 
 namespace CSus2Editor
 {
@@ -50,6 +51,8 @@ namespace CSus2Editor
             nud_noteInterval.Value = 5;
             options_firstNote.Checked = firstNote;
             options_showCrewmate.Checked = drawCremate;
+            options_measureLines.Checked = measureLines;
+            cm_drawEmpty.Checked = drawCrewmateEmpty;
 
             //Set columns to max
             nud_seqLength.Maximum = maxColumns;
@@ -229,8 +232,10 @@ namespace CSus2Editor
                 if (songNote == 0) {
                     // The "previous note" is the final one.
                     noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+                    noteCols[noteCols.Count - 1].drawCrewmate(false);
                 } else {
                     noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                    noteCols[songNote - 1].drawCrewmate(false);
                 }
                 return;
             }
@@ -275,6 +280,7 @@ namespace CSus2Editor
             {
                 // The "previous note" is the final one.
                 noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+                noteCols[noteCols.Count - 1].drawCrewmate(false);
             }
             else
             {
@@ -433,6 +439,9 @@ namespace CSus2Editor
             //Default color
             Color c = Color.White;
 
+            //Check if measure lines are enabled
+            if (!measureLines) goto SkipColor;
+
             //Beats
             if((i + 1) % quarters == 1)
             {
@@ -447,6 +456,8 @@ namespace CSus2Editor
             {
                 c = Color.Plum;
             }
+
+            SkipColor: int skipColor;
 
             //Return color
             return c;
@@ -651,7 +662,5 @@ namespace CSus2Editor
                 wait--;
             }
         }//End loadSequence
-
-        
     }
 }
