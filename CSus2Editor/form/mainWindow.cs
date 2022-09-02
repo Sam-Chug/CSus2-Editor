@@ -22,7 +22,7 @@ namespace CSus2Editor
         private static string STOP_SONG_TEXT = "Stop Song";
 
         //FreeSO's weird messed up note index
-        public string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
+        public string[] noteFSO = { "I", "C", "D", "E", "F", "G", "A", "B", "H" };
 
         //note(x).wav strings
         public static string[] noteFileName = { "empty", "E", "FS", "GS", "A", "B", "CS", "DS", "E2" };
@@ -112,45 +112,65 @@ namespace CSus2Editor
             string sequence = "";
             int interval = 0;
 
+            bool introCheck = true;
+
             //Get each note and add sequence
             for (int i = 0; i < noteCols.Count; i++)
             {
                 interval = (int)nud_noteInterval.Value;
 
-                if (indexList[i] != 0)
+                if (indexList[i] == 0 && introCheck)
                 {
-                    sequence += noteFSO[indexList[i]];
-                }
 
-                //Check if array has a following value
-                if(indexList.Length > (i + 1))
+                    sequence += noteFSO[indexList[i]] + interval;
+                    goto IntroEnd;
+
+                }
+                else
                 {
-                    //If note null
-                    if (indexList[i + 1] == 0)
+                    //If note not empty
+                    if (indexList[i] != 0)
                     {
-                        //Find interval until next note
-                        for (int j = 0; j < (noteCols.Count - i); j++)
+                        introCheck = false;
+                        sequence += noteFSO[indexList[i]];
+                    }
+
+                    //Check if array has a following value
+                    if (indexList.Length > (i + 1))
+                    {
+                        //If following note null
+                        if (indexList[i + 1] == 0)
                         {
-                            //Check if next note in search is null
-                            if(indexList.Length > (i + j + 1))
+                            //Find interval until next note
+                            for (int j = 0; j < (noteCols.Count - i); j++)
                             {
-                                //If next search is null
-                                if (indexList[i + j + 1] == 0)
+                                //Check if next note in search is null
+                                if (indexList.Length > (i + j + 1))
                                 {
-                                    //Increment interval
-                                    interval += (int)nud_noteInterval.Value;
+                                    //If next search is null
+                                    if (indexList[i + j + 1] == 0)
+                                    {
+                                        //Increment interval
+                                        interval += (int)nud_noteInterval.Value;
+                                    }
+                                    //If not null, end increment
+                                    else goto FollowingEnd;
                                 }
-                                //If not null, end increment
-                                else goto ForEnd;
-                            }
-                            else //If end of song reached, add default interval instead of sum of intervals
-                            {
-                                interval = (int)nud_noteInterval.Value;
+                                else //If end of song reached, add default interval instead of sum of intervals
+                                {
+                                    //Use number of empty spaces before outro, add that many null indexes with default interval
+                                    interval = (int)nud_noteInterval.Value;
+                                    sequence += interval;
+                                    string outro = String.Concat(Enumerable.Repeat("I" + interval, j));
+                                    sequence += outro;
+
+                                    //Exit generate loop
+                                    goto ExitFor;
+                                }
                             }
                         }
+                    FollowingEnd: int followingEnd;
                     }
-                //Placeholder for goto
-                ForEnd: int skip;
                 }
 
                 //Only write interval for non-null note index
@@ -158,7 +178,9 @@ namespace CSus2Editor
                 {
                     sequence += interval;
                 }
+                IntroEnd: int introEnd;
             }
+            ExitFor: int exitFor;
 
             //Set sequence text
             tb_noteSequence.Text = sequence;
@@ -575,7 +597,7 @@ namespace CSus2Editor
             //Get master interval from last loaded entry
             int interval = noteInt[noteInt.Count - 1];
             //Set player note interval to master value
-            nud_noteInterval.Value = 7;
+            nud_noteInterval.Value = interval;
 
             //Process loaded intervals against master interval to get column interval
             for (int i = 0; i < noteInt.Count; i++)
@@ -603,11 +625,15 @@ namespace CSus2Editor
                     wait = noteInt[parse];
 
                     //Place loaded note in proper location on number column
-                    noteCols[i].placeNote(7 - (int.Parse(noteHolder[parse]) - 1));
+                    if (int.Parse(noteHolder[parse]) != 0)
+                    {
+                        noteCols[i].placeNote(7 - (int.Parse(noteHolder[parse]) - 1));
+                    }
 
                     //Increment place in loaded sequence
                     parse++;
                 }
+
                 //Tick down interval
                 wait--;
             }
