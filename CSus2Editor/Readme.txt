@@ -1,4 +1,4 @@
-﻿CSus2 Music Box Editor Help
+﻿CSus2 Music Box Editor
 Created By: Reaganomics Lamborghini
 
 ==Song Length==
