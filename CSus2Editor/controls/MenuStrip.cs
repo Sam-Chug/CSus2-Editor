@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
+using CSus2Editor.form;
 
 namespace CSus2Editor
 {
@@ -50,5 +51,15 @@ namespace CSus2Editor
             timeSig.Show();
 
         }//End clickTimeSignature
+
+        //Open load sequence window
+        private void loadSequence(object sender, EventArgs e)
+        {
+
+            //Create new loadWindow and set owner to mainWindow
+            loadWindow load = new loadWindow();
+            load.ShowDialog(this);
+
+        }//End loadSequence
     }
 }

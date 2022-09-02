@@ -43,6 +43,7 @@ namespace CSus2Editor
             this.lbl_UIHLine2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ms_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.file_loadSeq = new System.Windows.Forms.ToolStripMenuItem();
             this.file_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_options = new System.Windows.Forms.ToolStripMenuItem();
             this.options_timeSignature = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,15 +214,23 @@ namespace CSus2Editor
             // ms_File
             // 
             this.ms_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.file_loadSeq,
             this.file_exit});
             this.ms_File.Name = "ms_File";
             this.ms_File.Size = new System.Drawing.Size(37, 22);
             this.ms_File.Text = "File";
             // 
+            // file_loadSeq
+            // 
+            this.file_loadSeq.Name = "file_loadSeq";
+            this.file_loadSeq.Size = new System.Drawing.Size(180, 22);
+            this.file_loadSeq.Text = "Load Sequence";
+            this.file_loadSeq.Click += new System.EventHandler(this.loadSequence);
+            // 
             // file_exit
             // 
             this.file_exit.Name = "file_exit";
-            this.file_exit.Size = new System.Drawing.Size(93, 22);
+            this.file_exit.Size = new System.Drawing.Size(180, 22);
             this.file_exit.Text = "Exit";
             this.file_exit.Click += new System.EventHandler(this.clickExit);
             // 
@@ -236,7 +245,7 @@ namespace CSus2Editor
             // options_timeSignature
             // 
             this.options_timeSignature.Name = "options_timeSignature";
-            this.options_timeSignature.Size = new System.Drawing.Size(180, 22);
+            this.options_timeSignature.Size = new System.Drawing.Size(153, 22);
             this.options_timeSignature.Text = "Time Signature";
             this.options_timeSignature.Click += new System.EventHandler(this.clickTimeSignature);
             // 
@@ -342,7 +351,6 @@ namespace CSus2Editor
             this.loopCheckbox.TabIndex = 19;
             this.loopCheckbox.Text = "Loop";
             this.loopCheckbox.UseVisualStyleBackColor = true;
-            this.loopCheckbox.CheckedChanged += new System.EventHandler(this.loopCheckboxClicked);
             // 
             // label3
             // 
@@ -424,6 +432,7 @@ namespace CSus2Editor
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox loopCheckbox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem file_loadSeq;
     }
 }
 

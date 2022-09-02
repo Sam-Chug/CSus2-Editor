@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
 using System.IO;
+using System.CodeDom.Compiler;
+using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace CSus2Editor
 {
@@ -17,7 +20,7 @@ namespace CSus2Editor
         private static string STOP_SONG_TEXT = "Stop Song";
 
         //FreeSO's weird messed up note index
-        string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
+        public string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
 
         public static string[] noteFileName = { "empty", "E", "FS", "GS", "A", "B", "CS", "DS", "E2" };
 
@@ -44,7 +47,7 @@ namespace CSus2Editor
             nud_noteInterval.Value = 5;
 
             //Generate note columns
-            generateNewPanels();
+            generateNewPanels((int)nud_seqLength.Value);
 
             //Set tick to timer
             songTime.Tick += new EventHandler(nextTick);
@@ -52,7 +55,7 @@ namespace CSus2Editor
         }//End windowLoad
 
         //Generate panels based on sequence length
-        private void generateNewPanels()
+        public void generateNewPanels(int panels)
         {
 
             //CLear previous panels
@@ -60,10 +63,10 @@ namespace CSus2Editor
             noteCols.Clear();
 
             //Index list to parse values for each usercontrol
-            indexList = new int[(int)nud_seqLength.Value];
+            indexList = new int[panels];
 
             //For sequence length, make and place new usercontrols
-            for (int i = 0; i < nud_seqLength.Value; i++)
+            for (int i = 0; i < panels; i++)
             {
 
                 NoteColumn notes = new NoteColumn();
@@ -91,7 +94,7 @@ namespace CSus2Editor
         private void clickGenerate(object sender, EventArgs e)
         {
 
-            generateNewPanels();
+            generateNewPanels((int)nud_seqLength.Value);
             
         }//End clickGenerate
 
@@ -421,8 +424,190 @@ namespace CSus2Editor
             }
         }//End refreshColumns
 
-        private void loopCheckboxClicked(object sender, EventArgs e) {
-            // Unused.
-        }
+        //Check validity of loaded sequence
+        public void loadValidity(string seq)
+        {
+            bool error = false;
+            bool numCheck = false;
+            bool letterCheck = false;
+
+            for (int i = 0; i < seq.Length; i++)
+            {
+                //Lower case check
+                if (char.IsLetter(seq[i]) && char.IsLower(seq[i]))
+                {
+                    error = true;
+                }
+
+                //Check if there are numbers
+                if (char.IsNumber(seq[i]))
+                {
+                    numCheck = true;
+                }
+
+                //Check if each note follows FreeSO's notation
+                if (char.IsLetter(seq[i]))
+                {
+                    bool notationCheck = false;
+
+                    for (int j = 0; j < noteFSO.Length; j++)
+                    {
+                        if (Convert.ToString(seq[i]) == noteFSO[j])
+                        {
+                            notationCheck = true;
+                            letterCheck = true;
+                        }
+                    }
+                    if (!notationCheck)
+                    {
+                        error = true;
+                    }
+                }
+
+                //Make sure letter always follows number
+                if (i > 0)
+                {
+                    if (char.IsLetter(seq[i]) && !char.IsNumber(seq[i - 1]))
+                    {
+                        error = true;
+                    }
+                }
+
+                //Check if letters follow another
+                if(seq.Length < (i + 1))
+                {
+                    if (char.IsLetter(seq[i]) && char.IsLetter(seq[i + 1]))
+                    {
+                        error = true;
+                    }
+                }
+
+                //Make sure last character is a number
+                if (!char.IsDigit(seq[seq.Length - 1]))
+                {
+                    error = true;
+                }
+            }
+
+            //Check for numbers and valid letters
+            if (!numCheck || !letterCheck)
+            {
+                error = true;
+            }
+
+            //If error found, show warning and do not pass to loading
+            if (error)
+            {
+                MessageBox.Show("This sequence does not follow the input format!", "Warning!");
+                return;
+            }
+
+            //Move on to loading sequence if it checks out
+            loadSequence(seq);
+
+        }//End loadValidity
+
+        //Process note string and load into the sequencer
+        public void loadSequence(string seq)
+        {
+
+            string noteParse = "";
+
+            List<string> noteHolder = new List<string>();
+            List<int> noteInt = new List<int>();
+
+            //Split string into each note with it's interval
+            for (int i = 0; i < seq.Length; i++)
+            {
+                //If note is letter, start new entry
+                if (char.IsLetter(seq[i]))
+                {
+                    //Start new note on letter
+                    noteParse = Convert.ToString(seq[i]);
+                }
+                else
+                {
+                    //Add numbers to end of letter
+                    noteParse += seq[i];
+                }
+
+                //If next character is letter, add entry to parsed notes
+                if(seq.Length > i + 1)
+                {
+                    if (char.IsLetter(seq[i + 1]))
+                    {
+                        noteHolder.Add(noteParse);
+                    }
+                }
+                //Add entry at the end of sequence (workaround)
+                else noteHolder.Add(noteParse);
+            }//End for
+
+            //Get index of note and interval total
+            for (int i = 0; i < noteHolder.Count; i++)
+            {
+                //Get string at location in loaded note index
+                string s = noteHolder[i];
+                int noteIndex = 0;
+
+                //Find number value of loaded notes
+                for (int j = 0; j < noteFSO.Length; j++)
+                {
+                    //Check against FreeSO's notes
+                    if(Convert.ToString(s[0]) == noteFSO[j])
+                    {
+                        //Get index value of note
+                        noteIndex = j;
+                        //Replace noteholder value with index
+                        noteHolder[i] = Convert.ToString(noteIndex);
+                        goto EndFor;
+                    }
+                }
+                EndFor: int endFor;
+
+                //Add loaded note interval to list
+                noteInt.Add(int.Parse(s.Remove(0, 1)));
+            }
+
+            //Get master interval from last loaded entry
+            int interval = noteInt[noteInt.Count - 1];
+            //Set player note interval to master value
+            nud_noteInterval.Value = 7;
+
+            //Process loaded intervals against master interval to get column interval
+            for (int i = 0; i < noteInt.Count; i++)
+            {
+                noteInt[i] = noteInt[i] / interval;
+            }
+
+            //Generate loaded song's note columns
+            generateNewPanels(noteInt.Sum());
+
+            //Reset index list to enter loaded notes
+            indexList = new int[noteInt.Sum()];
+
+            int parse = 0;
+            int wait = 0;
+
+            //Fill index list with notes, based on length between each note
+            for (int i = 0; i < indexList.Length; i++)
+            {
+                //If interval is finished
+                if(wait == 0)
+                {
+                    //Add note and go to next interval
+                    indexList[i] = int.Parse(noteHolder[parse]);
+                    wait = noteInt[parse];
+
+                    //Place loaded note in proper location on number column
+                    noteCols[i].placeNote(7 - (int.Parse(noteHolder[parse]) - 1));
+
+                    //Increment place in loaded sequence
+                    parse++;
+                }
+                //Tick down interval
+                wait--;
+            }
+        }//End loadSequence
     }
 }

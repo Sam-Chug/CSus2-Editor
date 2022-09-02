@@ -99,6 +99,19 @@ namespace CSus2Editor
             //Clear previous note
             clearNote(null, null);
 
+            //Generate Note
+            placeNote(y);
+
+            //Play seleced note
+            mainWindow.notes = new SoundPlayer(@".\sounds\note" + mainWindow.noteFileName[noteIndex.Length - y] + ".wav");
+            mainWindow.notes.Play();
+
+        }//End getAreaClicked
+
+        //Place note at specified location in column
+        public void placeNote(int y)
+        {
+
             //Create new button control
             NoteButton highlight = new NoteButton();
             pnl_Buttons.Controls.Add(highlight);
@@ -112,10 +125,6 @@ namespace CSus2Editor
             //Set index to list
             mainWindow.indexList[index] = noteIndex.Length - y;
 
-            //Play seleced note
-            mainWindow.notes = new SoundPlayer(@".\sounds\note" + mainWindow.noteFileName[noteIndex.Length - y] + ".wav");
-            mainWindow.notes.Play();
-
-        }//End getAreaClicked
+        }//End placeNote
     }
 }
