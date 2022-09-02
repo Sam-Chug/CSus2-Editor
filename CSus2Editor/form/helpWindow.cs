@@ -27,7 +27,8 @@ namespace CSus2Editor
             //Get text from Readme file
             rtb_helpText.Text = helpText;
             //Fake-disable richtextbox
-            ControlExtensions.DisableRTB(rtb_helpText, helpWindow.ActiveForm);
+            ControlExtensions.DisableRTB(rtb_helpText, lbl_UIFocusTarget);
+            rtb_helpText.BackColor = Color.White;
 
         }//End formLoad
 

@@ -31,12 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(helpWindow));
             this.pnl_UIHelp = new System.Windows.Forms.Panel();
             this.rtb_helpText = new System.Windows.Forms.RichTextBox();
+            this.lbl_UIFocusTarget = new System.Windows.Forms.Label();
             this.pnl_UIHelp.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_UIHelp
             // 
             this.pnl_UIHelp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UIHelp.Controls.Add(this.lbl_UIFocusTarget);
             this.pnl_UIHelp.Controls.Add(this.rtb_helpText);
             this.pnl_UIHelp.Location = new System.Drawing.Point(4, 4);
             this.pnl_UIHelp.Name = "pnl_UIHelp";
@@ -52,6 +54,14 @@
             this.rtb_helpText.TabIndex = 0;
             this.rtb_helpText.Text = "";
             // 
+            // lbl_UIFocusTarget
+            // 
+            this.lbl_UIFocusTarget.AutoSize = true;
+            this.lbl_UIFocusTarget.Location = new System.Drawing.Point(46, 64);
+            this.lbl_UIFocusTarget.Name = "lbl_UIFocusTarget";
+            this.lbl_UIFocusTarget.Size = new System.Drawing.Size(0, 13);
+            this.lbl_UIFocusTarget.TabIndex = 1;
+            // 
             // helpWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -66,6 +76,7 @@
             this.Load += new System.EventHandler(this.formLoad);
             this.Resize += new System.EventHandler(this.formResize);
             this.pnl_UIHelp.ResumeLayout(false);
+            this.pnl_UIHelp.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -74,5 +85,6 @@
 
         private System.Windows.Forms.Panel pnl_UIHelp;
         private System.Windows.Forms.RichTextBox rtb_helpText;
+        private System.Windows.Forms.Label lbl_UIFocusTarget;
     }
 }
