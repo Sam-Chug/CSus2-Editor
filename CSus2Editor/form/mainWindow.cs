@@ -30,6 +30,9 @@ namespace CSus2Editor
         //note index array
         public static int[] indexList;
 
+        //Max column amount
+        int maxColumns = 250;
+
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();
 
@@ -45,6 +48,9 @@ namespace CSus2Editor
             nud_seqLength.Value = 16;
             nud_addColumns.Value = 1;
             nud_noteInterval.Value = 5;
+
+            nud_seqLength.Maximum = maxColumns;
+            nud_addColumns.Maximum = maxColumns;
 
             //Generate note columns
             generateNewPanels((int)nud_seqLength.Value);
@@ -300,7 +306,7 @@ namespace CSus2Editor
         private void clickAddColumns(object sender, EventArgs e)
         {
             //Stop columns from going over 100
-            if(indexList.Length == 100)
+            if(indexList.Length == maxColumns)
             {
                 MessageBox.Show("Column limit reached!", "Warning!");
                 return;
@@ -312,9 +318,9 @@ namespace CSus2Editor
             //number of columns to add
             int addValue = (int)nud_addColumns.Value;
 
-            if (indexList.Length + nud_addColumns.Value > 100)
+            if (indexList.Length + nud_addColumns.Value > maxColumns)
             {
-                addValue = 100 - indexList.Length;
+                addValue = maxColumns - indexList.Length;
             }
 
             //Old number of columns
@@ -399,6 +405,10 @@ namespace CSus2Editor
             if ((i + 1) % (beats * quarters) == 1)
             {
                 c = Color.LightCoral;
+            }
+            if ((i + 1) % (beats * beats * quarters) == 1)
+            {
+                c = Color.Plum;
             }
 
             //Return color

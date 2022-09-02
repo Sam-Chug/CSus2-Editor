@@ -69,7 +69,7 @@ namespace CSus2Editor
             this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_noteSequence.Location = new System.Drawing.Point(4, 449);
             this.tb_noteSequence.Name = "tb_noteSequence";
-            this.tb_noteSequence.Size = new System.Drawing.Size(466, 25);
+            this.tb_noteSequence.Size = new System.Drawing.Size(466, 49);
             this.tb_noteSequence.TabIndex = 7;
             this.tb_noteSequence.Text = "";
             this.tb_noteSequence.Click += new System.EventHandler(this.copyText);
@@ -160,7 +160,7 @@ namespace CSus2Editor
             this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_seqUpdate.Location = new System.Drawing.Point(473, 448);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
-            this.btn_seqUpdate.Size = new System.Drawing.Size(80, 27);
+            this.btn_seqUpdate.Size = new System.Drawing.Size(80, 50);
             this.btn_seqUpdate.TabIndex = 8;
             this.btn_seqUpdate.Text = "Generate";
             this.btn_seqUpdate.UseVisualStyleBackColor = true;
@@ -223,14 +223,14 @@ namespace CSus2Editor
             // file_loadSeq
             // 
             this.file_loadSeq.Name = "file_loadSeq";
-            this.file_loadSeq.Size = new System.Drawing.Size(180, 22);
+            this.file_loadSeq.Size = new System.Drawing.Size(154, 22);
             this.file_loadSeq.Text = "Load Sequence";
             this.file_loadSeq.Click += new System.EventHandler(this.loadSequence);
             // 
             // file_exit
             // 
             this.file_exit.Name = "file_exit";
-            this.file_exit.Size = new System.Drawing.Size(180, 22);
+            this.file_exit.Size = new System.Drawing.Size(154, 22);
             this.file_exit.Text = "Exit";
             this.file_exit.Click += new System.EventHandler(this.clickExit);
             // 
@@ -245,7 +245,7 @@ namespace CSus2Editor
             // options_timeSignature
             // 
             this.options_timeSignature.Name = "options_timeSignature";
-            this.options_timeSignature.Size = new System.Drawing.Size(153, 22);
+            this.options_timeSignature.Size = new System.Drawing.Size(180, 22);
             this.options_timeSignature.Text = "Time Signature";
             this.options_timeSignature.Click += new System.EventHandler(this.clickTimeSignature);
             // 
@@ -365,7 +365,7 @@ namespace CSus2Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 478);
+            this.ClientSize = new System.Drawing.Size(556, 501);
             this.Controls.Add(this.lbl_UIHLine2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.loopCheckbox);
@@ -388,7 +388,7 @@ namespace CSus2Editor
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(572, 517);
+            this.MinimumSize = new System.Drawing.Size(572, 540);
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csus2 Music Box Editor";
