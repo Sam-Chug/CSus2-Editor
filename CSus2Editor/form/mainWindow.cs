@@ -49,6 +49,7 @@ namespace CSus2Editor
             nud_addColumns.Value = 1;
             nud_noteInterval.Value = 5;
             options_firstNote.Checked = firstNote;
+            options_showCrewmate.Checked = drawCremate;
 
             //Set columns to max
             nud_seqLength.Maximum = maxColumns;
@@ -278,6 +279,7 @@ namespace CSus2Editor
             else
             {
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                noteCols[songNote - 1].drawCrewmate(false);
             }
 
             //Play note if not null
@@ -287,6 +289,13 @@ namespace CSus2Editor
                 notes = new SoundPlayer(@".\sounds\note" + noteFileName[indexList[songNote]] + ".wav");
                 //Play note
                 notes.Play();
+                //Generate crewmate at note location
+                noteCols[songNote].drawCrewmate(true);
+            }
+            //If null, draw crewmate at index equal to last non-null index
+            else
+            {
+                noteCols[songNote].drawCrewmate(true);
             }
 
             //Check if end of note sequence reached
@@ -303,6 +312,7 @@ namespace CSus2Editor
             {
                 //Force back to default
                 noteCols[songNote].setColorRTB(beatColor(songNote));
+                noteCols[songNote].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
@@ -321,6 +331,7 @@ namespace CSus2Editor
             {
                 //Force back to default
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                noteCols[songNote - 1].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
@@ -640,5 +651,7 @@ namespace CSus2Editor
                 wait--;
             }
         }//End loadSequence
+
+        
     }
 }

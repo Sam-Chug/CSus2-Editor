@@ -67,6 +67,56 @@ namespace CSus2Editor
 
         }//End setColorRTB
 
+        //This whole thing is sus
+        public void drawCrewmate(bool alive)
+        {
+
+            if (!mainWindow.drawCremate) return;
+
+            //Generate crewmate at note
+            if (alive)
+            {
+                //New crewmate
+                Crewmate crewmate = new Crewmate();
+                pnl_Buttons.Controls.Add(crewmate);
+
+                int crewmateY = mainWindow.indexList[index];
+
+                //Backwards search to find first non-null note
+                if (mainWindow.indexList[index] == 0)
+                {
+                    for (int i = (mainWindow.indexList[index] - (mainWindow.indexList[index] - index)); i-- > 0;)
+                    {
+                        //Set crewmate location to last non-null note
+                        if (mainWindow.indexList[i] != 0)
+                        {
+                            crewmateY = mainWindow.indexList[i];
+                            goto EndFor;
+                        }
+                    }
+                }EndFor: int endFor;
+
+                //Set location to note index
+                crewmate.Location = new Point(0, ((8 - crewmateY) * 36) + 9);
+                //Bring to front
+                crewmate.BringToFront();
+            }
+
+            //Kill crewmate after note
+            else
+            {
+                //Find crewmate in vents
+                foreach (Control c in pnl_Buttons.Controls)
+                {
+                    //Crewmate gets voted out
+                    if(c is Crewmate)
+                    {
+                        pnl_Buttons.Controls.Remove(c);
+                    }
+                }
+            }
+        }//End drawCrewmate
+
         //Find position of mouse inside note column
         private void mouseMove(object sender, MouseEventArgs e)
         {

@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controls\ControlExtensions.cs" />
+    <Compile Include="Crewmate.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="form\helpWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +120,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="form\timesigWindow.resx">
       <DependentUpon>timesigWindow.cs</DependentUpon>
@@ -136,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\crewmate.png" />
+    <Content Include="res\crewmate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="res\Csus2-Icon.ico" />

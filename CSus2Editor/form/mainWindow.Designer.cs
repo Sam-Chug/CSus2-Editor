@@ -47,6 +47,7 @@ namespace CSus2Editor
             this.file_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_options = new System.Windows.Forms.ToolStripMenuItem();
             this.options_timeSignature = new System.Windows.Forms.ToolStripMenuItem();
+            this.options_firstNote = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.help_viewHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.help_about = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,7 @@ namespace CSus2Editor
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             this.loopCheckbox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.options_firstNote = new System.Windows.Forms.ToolStripMenuItem();
+            this.options_showCrewmate = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_seqLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -239,7 +240,8 @@ namespace CSus2Editor
             // 
             this.ms_options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.options_timeSignature,
-            this.options_firstNote});
+            this.options_firstNote,
+            this.options_showCrewmate});
             this.ms_options.Name = "ms_options";
             this.ms_options.Size = new System.Drawing.Size(61, 22);
             this.ms_options.Text = "Options";
@@ -250,6 +252,13 @@ namespace CSus2Editor
             this.options_timeSignature.Size = new System.Drawing.Size(180, 22);
             this.options_timeSignature.Text = "Time Signature";
             this.options_timeSignature.Click += new System.EventHandler(this.clickTimeSignature);
+            // 
+            // options_firstNote
+            // 
+            this.options_firstNote.Name = "options_firstNote";
+            this.options_firstNote.Size = new System.Drawing.Size(180, 22);
+            this.options_firstNote.Text = "Play at First Note";
+            this.options_firstNote.Click += new System.EventHandler(this.clickFirstNote);
             // 
             // ms_Help
             // 
@@ -363,12 +372,12 @@ namespace CSus2Editor
             this.label3.TabIndex = 20;
             this.label3.Text = "label3";
             // 
-            // options_firstNote
+            // options_showCrewmate
             // 
-            this.options_firstNote.Name = "options_firstNote";
-            this.options_firstNote.Size = new System.Drawing.Size(180, 22);
-            this.options_firstNote.Text = "Play at First Note";
-            this.options_firstNote.Click += new System.EventHandler(this.clickFirstNote);
+            this.options_showCrewmate.Name = "options_showCrewmate";
+            this.options_showCrewmate.Size = new System.Drawing.Size(180, 22);
+            this.options_showCrewmate.Text = "Show Crewmate";
+            this.options_showCrewmate.Click += new System.EventHandler(this.clickCrewmate);
             // 
             // mainWindow
             // 
@@ -443,6 +452,7 @@ namespace CSus2Editor
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem file_loadSeq;
         private System.Windows.Forms.ToolStripMenuItem options_firstNote;
+        private System.Windows.Forms.ToolStripMenuItem options_showCrewmate;
     }
 }
 
