@@ -87,14 +87,18 @@ namespace CSus2Editor
         private void getAreaClicked()
         {
             //Get y index position
-            int y = Math.Min((mouseY - 4) / 36, 7);
+            int y = (mouseY - 10) / 36;
 
-            //Clear previous note
-            clearNote(null, null);
-
-            //Generate Note
-            placeNote(y);
-
+            //Check if note in range
+            if (y <= 7)
+            {
+                //Clear previous note
+                clearNote(null, null);
+                //Place new note
+                placeNote(y);
+            }
+            else return;
+            
             //Play seleced note
             mainWindow.notes = new SoundPlayer(@".\sounds\note" + mainWindow.noteFileName[noteIndex.Length - y] + ".wav");
             mainWindow.notes.Play();
