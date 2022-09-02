@@ -128,7 +128,7 @@ namespace CSus2Editor
             // 
             this.label1.AutoSize = true;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(483, 583);
+            this.label1.Location = new System.Drawing.Point(483, 582);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 22);
@@ -137,7 +137,7 @@ namespace CSus2Editor
             // 
             // nud_noteInterval
             // 
-            this.nud_noteInterval.Location = new System.Drawing.Point(483, 610);
+            this.nud_noteInterval.Location = new System.Drawing.Point(483, 609);
             this.nud_noteInterval.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nud_noteInterval.Minimum = new decimal(new int[] {
             1,
@@ -176,7 +176,7 @@ namespace CSus2Editor
             // 
             // btn_playSong
             // 
-            this.btn_playSong.Location = new System.Drawing.Point(701, 580);
+            this.btn_playSong.Location = new System.Drawing.Point(700, 580);
             this.btn_playSong.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_playSong.Name = "btn_playSong";
             this.btn_playSong.Size = new System.Drawing.Size(128, 62);
@@ -267,7 +267,7 @@ namespace CSus2Editor
             // lbl_UIAddColumns
             // 
             this.lbl_UIAddColumns.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_UIAddColumns.Location = new System.Drawing.Point(222, 580);
+            this.lbl_UIAddColumns.Location = new System.Drawing.Point(222, 581);
             this.lbl_UIAddColumns.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_UIAddColumns.Name = "lbl_UIAddColumns";
             this.lbl_UIAddColumns.Size = new System.Drawing.Size(134, 23);
@@ -276,7 +276,7 @@ namespace CSus2Editor
             // 
             // nud_addColumns
             // 
-            this.nud_addColumns.Location = new System.Drawing.Point(222, 607);
+            this.nud_addColumns.Location = new System.Drawing.Point(222, 609);
             this.nud_addColumns.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nud_addColumns.Minimum = new decimal(new int[] {
             1,
@@ -295,7 +295,7 @@ namespace CSus2Editor
             // 
             // btn_addColumns
             // 
-            this.btn_addColumns.Location = new System.Drawing.Point(359, 578);
+            this.btn_addColumns.Location = new System.Drawing.Point(355, 580);
             this.btn_addColumns.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_addColumns.Name = "btn_addColumns";
             this.btn_addColumns.Size = new System.Drawing.Size(112, 62);
@@ -337,9 +337,10 @@ namespace CSus2Editor
             // loopCheckbox
             // 
             this.loopCheckbox.AutoSize = true;
-            this.loopCheckbox.Location = new System.Drawing.Point(623, 611);
+            this.loopCheckbox.Location = new System.Drawing.Point(620, 610);
             this.loopCheckbox.Name = "loopCheckbox";
-            this.loopCheckbox.Size = new System.Drawing.Size(71, 24);
+            this.loopCheckbox.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.loopCheckbox.Size = new System.Drawing.Size(71, 25);
             this.loopCheckbox.TabIndex = 19;
             this.loopCheckbox.Text = "Loop";
             this.loopCheckbox.UseVisualStyleBackColor = true;
