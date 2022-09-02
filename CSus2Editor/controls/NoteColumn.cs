@@ -83,7 +83,7 @@ namespace CSus2Editor
                 //New crewmate
                 Crewmate crewmate = new Crewmate();
                 pnl_Buttons.Controls.Add(crewmate);
-                crewmate.BackColor = Color.LightGreen;
+                crewmate.BackColor = Color.LemonChiffon;
 
                 int crewmateY = mainWindow.indexList[index];
 
@@ -93,13 +93,13 @@ namespace CSus2Editor
                 //Workaround for weird behavior at index 0
                 if(index == 0 && mainWindow.indexList[index] == 0)
                 {
-                    for (int i = mainWindow.indexList.Length - 1; i-- > 0;)
+                    //Search ahead for first non-null note
+                    for (int i = 0; i < mainWindow.indexList.Length; i++)
                     {
-                        if(mainWindow.indexList[i] != 0)
+                        if (mainWindow.indexList[i] != 0)
                         {
                             //Set Y to last value in indexlist
                             crewmateY = mainWindow.indexList[i];
-                            crewmate.BackColor = Color.LemonChiffon;
                             goto EndFor;
                         }
                     }
@@ -114,12 +114,19 @@ namespace CSus2Editor
                         if (mainWindow.indexList[i] != 0)
                         {
                             crewmateY = mainWindow.indexList[i];
-                            crewmate.BackColor = Color.LemonChiffon;
                             goto EndFor;
                         }
+                        //If no non-null notes behind, search ahead for first non-null note
                         if(i == 0)
                         {
-                            i = mainWindow.indexList.Length;
+                            for (int j = 0; j < mainWindow.indexList.Length; j++)
+                            {
+                                if (mainWindow.indexList[j] != 0)
+                                {
+                                    crewmateY = mainWindow.indexList[j];
+                                    goto EndFor;
+                                }
+                            }
                         }
                     }
                 }
@@ -127,7 +134,10 @@ namespace CSus2Editor
 
                 //Set min Y
                 crewmateY = Math.Min(crewmateY, 7);
-                
+
+                //Set crewmate backcolor green if on note
+                if (mainWindow.indexList[index] != 0) crewmate.BackColor = Color.LightGreen;
+
                 //Skip empty note drawing if option disabled
                 if (!mainWindow.drawCrewmateEmpty && crewmateY == 0) return;
 

@@ -31,6 +31,15 @@ At the bottom of the window, you will see an empty text box. To fill the textbox
 Clicking "Load Sequence" under the "File" menu button will open a prompt asking for a sequence. Paste your note sequence in the text box and press the enter key, and your song will be loaded into the editor. Beware, only sequences that follow this program's output format will work!
 
 
+==Options==
+There are a few settings under the "Options" menu button that will effect the visuals.
+
+"Show Measure Lines" will enable or disable the measure and beat colors from drawing, and all of the note columns will be white.
+
+"Play at Fist Note" will decide wether or not the song plays from the beginning of the sequence, or at the first placed note on the sequence.
+
+"Show Crewmate" will draw a crewmate following the notes you place, and "Draw Empty Notes" will draw the crewmate on empty notes, either at the previous or next note's height, depending on the location of the play bar.
+
 ==Tips==
 FreeSO has a hard time playing repeating notes for some reason, so try to avoid having the same note twice in a row in your sequence. Intervals of at least 4 to 5 are also recommended, FreeSO also has an issue skipping notes if the interval is too short. This may be due to lag or desynchronization, but I have no idea.
 
