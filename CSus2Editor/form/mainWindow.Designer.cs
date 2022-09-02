@@ -58,6 +58,7 @@ namespace CSus2Editor
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             this.loopCheckbox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.options_firstNote = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_seqLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -237,7 +238,8 @@ namespace CSus2Editor
             // ms_options
             // 
             this.ms_options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.options_timeSignature});
+            this.options_timeSignature,
+            this.options_firstNote});
             this.ms_options.Name = "ms_options";
             this.ms_options.Size = new System.Drawing.Size(61, 22);
             this.ms_options.Text = "Options";
@@ -361,6 +363,13 @@ namespace CSus2Editor
             this.label3.TabIndex = 20;
             this.label3.Text = "label3";
             // 
+            // options_firstNote
+            // 
+            this.options_firstNote.Name = "options_firstNote";
+            this.options_firstNote.Size = new System.Drawing.Size(180, 22);
+            this.options_firstNote.Text = "Play at First Note";
+            this.options_firstNote.Click += new System.EventHandler(this.clickFirstNote);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -433,6 +442,7 @@ namespace CSus2Editor
         private System.Windows.Forms.CheckBox loopCheckbox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem file_loadSeq;
+        private System.Windows.Forms.ToolStripMenuItem options_firstNote;
     }
 }
 

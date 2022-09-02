@@ -11,6 +11,8 @@ namespace CSus2Editor
     public partial class mainWindow
     {
 
+        bool firstNote = true;
+
         //On clicking about under help
         private void clickAbout(object sender, EventArgs e)
         {
@@ -55,5 +57,14 @@ namespace CSus2Editor
             load.ShowDialog(this);
 
         }//End loadSequence
+
+
+        private void clickFirstNote(object sender, EventArgs e)
+        {
+
+            firstNote ^= true;
+            options_firstNote.Checked = firstNote;
+
+        }
     }
 }

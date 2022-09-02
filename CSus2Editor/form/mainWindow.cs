@@ -48,6 +48,7 @@ namespace CSus2Editor
             nud_seqLength.Value = 16;
             nud_addColumns.Value = 1;
             nud_noteInterval.Value = 5;
+            options_firstNote.Checked = firstNote;
 
             //Set columns to max
             nud_seqLength.Maximum = maxColumns;
@@ -242,7 +243,9 @@ namespace CSus2Editor
             //Set interval (default 33ms)
             songTime.Interval = (int)nud_noteInterval.Value * 33;
 
-            //Find first non-empty note
+            //Find first non-empty note if option is enabled
+            if (!firstNote) goto EndFor;
+
             for (int i = 0; i < indexList.Length; i++)
             {
                 if (indexList[i] != 0)
@@ -535,7 +538,6 @@ namespace CSus2Editor
         //Process note string and load into the sequencer
         public void loadSequence(string seq)
         {
-
             string noteParse = "";
 
             List<string> noteHolder = new List<string>();
