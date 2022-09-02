@@ -13,8 +13,8 @@ namespace CSus2Editor
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
-        private static string PLAY_SONG_TEXT = "PlaySong";
-        private static string STOP_SONG_TEXT = "PlaySong";
+        private static string PLAY_SONG_TEXT = "Play Song";
+        private static string STOP_SONG_TEXT = "Stop Song";
 
         //FreeSO's weird messed up note index
         string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
@@ -193,8 +193,10 @@ namespace CSus2Editor
         {
             if (songTime.Enabled)
             {
+                // Stop the song and reset the currently playing note's color.
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
+                noteCols[songNote].setColorRTB(beatColor(songNote));
                 return;
             }
 
@@ -230,10 +232,14 @@ namespace CSus2Editor
             //Color current column
             noteCols[songNote].setColorRTB(Color.LemonChiffon);
 
-            //Check if on first note
-            if(songNote != 0)
+            // Change the previous note to its original color.
+            if (songNote == 0)
             {
-                //Change back to white
+                // The "previous note" is the final one.
+                noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+            }
+            else
+            {
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
             }
 
