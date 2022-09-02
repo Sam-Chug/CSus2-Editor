@@ -13,6 +13,9 @@ namespace CSus2Editor
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
+        private static string PLAY_SONG_TEXT = "PlaySong";
+        private static string STOP_SONG_TEXT = "PlaySong";
+
         //FreeSO's weird messed up note index
         string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
 
@@ -169,11 +172,13 @@ namespace CSus2Editor
         //Upon resizing, fit panel to window
         private void resizeForm(object sender, EventArgs e)
         {
-
-            //Process resizable controls
-            pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
-            lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
-            lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+            if (mainWindow.ActiveForm != null)
+            {
+                //Process resizable controls
+                pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
+                lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
+                lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+            }
 
         }//End resizeForm
 
@@ -186,6 +191,12 @@ namespace CSus2Editor
         //On clicking play song button
         private void clickListen(object sender, EventArgs e)
         {
+            if (songTime.Enabled)
+            {
+                songTime.Enabled = false;
+                btn_playSong.Text = PLAY_SONG_TEXT;
+                return;
+            }
 
             //Print sequence to textbox
             clickUpdate(null, e);
@@ -197,10 +208,8 @@ namespace CSus2Editor
             songTime.Interval = (int)nud_noteInterval.Value * 33;
 
             //Find first non-empty note
-            for (int i = 0; i < indexList.Length; i++)
-            {
-                if (indexList[i] != 0)
-                {
+            for (int i = 0; i < indexList.Length; i++) {
+                if (indexList[i] != 0) {
                     //Set played note index to first non-empty note
                     songNote = i;
                     goto EndFor;
@@ -211,8 +220,7 @@ namespace CSus2Editor
 
             //Start timer
             songTime.Enabled = true;
-            btn_playSong.Enabled = false;
-
+            btn_playSong.Text = STOP_SONG_TEXT;
         }//End clickListen
 
         //Tick process for timer to play song
@@ -244,13 +252,17 @@ namespace CSus2Editor
                 //Play note if not end of sequence
                 songNote++;
             }
+            else if (loopCheckbox.Checked) // Loop back to beginning
+            {
+                songNote = 0;
+            }
             else //Stop timer if end of sequence reached
             {
                 //Force back to default
                 noteCols[songNote].setColorRTB(beatColor(songNote));
                 //Stop timer
                 songTime.Enabled = false;
-                btn_playSong.Enabled = true;
+                btn_playSong.Text = PLAY_SONG_TEXT;
             }
 
             //Test var
@@ -268,7 +280,7 @@ namespace CSus2Editor
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
                 //Stop timer
                 songTime.Enabled = false;
-                btn_playSong.Enabled = true;
+                btn_playSong.Text = PLAY_SONG_TEXT;
             }
 
         }//End next tick
@@ -397,5 +409,9 @@ namespace CSus2Editor
 
             }
         }//End refreshColumns
+
+        private void loopCheckboxClicked(object sender, EventArgs e) {
+            // Unused.
+        }
     }
 }
