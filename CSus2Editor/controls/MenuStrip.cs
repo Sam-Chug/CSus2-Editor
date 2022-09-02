@@ -14,8 +14,7 @@ namespace CSus2Editor
         //On clicking about under help
         private void clickAbout(object sender, EventArgs e)
         {
-
-            MessageBox.Show("CSus2 Music Box Editor Version 1.0" +
+            MessageBox.Show("CSus2 Music Box Editor " + mainWindow.version + 
                           "\nCreated By: Reaganomics Lamborghini",
                           "About CSus2 Editor");
 
@@ -24,9 +23,7 @@ namespace CSus2Editor
         //On clicking view help under help
         private void clickViewHelp(object sender, EventArgs e)
         {
-
             helpWindow help = new helpWindow();
-
             help.Show();
 
         }//End clickViewHelp
@@ -45,9 +42,7 @@ namespace CSus2Editor
         //Open time signature window
         private void clickTimeSignature(object sender, EventArgs e)
         {
-
             timesigWindow timeSig = new timesigWindow();
-
             timeSig.Show();
 
         }//End clickTimeSignature
@@ -55,7 +50,6 @@ namespace CSus2Editor
         //Open load sequence window
         private void loadSequence(object sender, EventArgs e)
         {
-
             //Create new loadWindow and set owner to mainWindow
             loadWindow load = new loadWindow();
             load.ShowDialog(this);

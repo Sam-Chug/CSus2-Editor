@@ -31,7 +31,6 @@ namespace CSus2Editor
         //Format time signature label
         private void timeSigLabel()
         {
-
             lbl_newSig.Text = "Signature: " + nud_beats.Value + "/" + nud_quarters.Value;
 
         }//End timeSigLabel
@@ -52,11 +51,11 @@ namespace CSus2Editor
 
         }//End clickNewSig
 
+        //Change time signature label to reflect numericupdown values
         private void changeNud(object sender, EventArgs e)
         {
-
             timeSigLabel();
 
-        }
+        }//End changeNud
     }
 }

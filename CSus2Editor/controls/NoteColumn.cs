@@ -10,7 +10,6 @@ namespace CSus2Editor
 {
     public partial class NoteColumn : UserControl
     {
-
         //Real note index
         public static string[] noteIndex = { "E", "F#", "G#", "A", "B", "C#", "D#", "E2" };
 
@@ -29,8 +28,7 @@ namespace CSus2Editor
         //On load, populate button list
         private void controlLoad(object sender, EventArgs e)
         {
-
-
+            //Format richtextbox
             formatRTBText();
 
             //Disable RTB usage
@@ -38,20 +36,19 @@ namespace CSus2Editor
 
         }//End controlLoad
 
+        //Set richtextbox text, center it, and add it's # position in the column list
         private void formatRTBText()
         {
-
             //Format note texts
             rtb_notes.Text = "\r\nE2\r\n\r\nD#\r\n\r\nC#\r\n\r\nB\r\n\r\nA\r\n\r\nG#\r\n\r\nF#\r\n\r\nE\r\n\r\n" + (index + 1);
             rtb_notes.SelectAll();
             rtb_notes.SelectionAlignment = HorizontalAlignment.Center;
 
-        }
+        }//End formatRTBText
 
         //Clear note selection and formatting
         private void clearNote(object sender, EventArgs e)
         {
-
             //Clear previous button
             foreach (Control c in pnl_Buttons.Controls)
             {
@@ -61,20 +58,18 @@ namespace CSus2Editor
                     mainWindow.indexList[index] = 0;
                 }
             }
-
         }//End clearNote
 
+        //Set backcolor of richtextbox
         public void setColorRTB(Color color)
         {
-
             rtb_notes.BackColor = color;
 
-        }
+        }//End setColorRTB
 
         //Find position of mouse inside note column
         private void mouseMove(object sender, MouseEventArgs e)
         {
-
             //Get mouse X and Y
             mouseX = e.Location.X;
             mouseY = e.Location.Y;
@@ -84,7 +79,6 @@ namespace CSus2Editor
         //Process clicked spot on note column
         private void mouseClick(object sender, EventArgs e)
         {
-
             getAreaClicked();
 
         }//End mouseClick
@@ -92,7 +86,6 @@ namespace CSus2Editor
         //Process note clicked and apply to note index
         private void getAreaClicked()
         {
-
             //Get y index position
             int y = Math.Min((mouseY - 4) / 36, 7);
 
@@ -111,7 +104,6 @@ namespace CSus2Editor
         //Place note at specified location in column
         public void placeNote(int y)
         {
-
             //Create new button control
             NoteButton highlight = new NoteButton();
             pnl_Buttons.Controls.Add(highlight);

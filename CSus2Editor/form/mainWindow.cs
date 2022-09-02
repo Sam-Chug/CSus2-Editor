@@ -13,6 +13,8 @@ namespace CSus2Editor
 {
     public partial class mainWindow : Form
     {
+        //So I dont forget to change it in the texts again lmao
+        public static string version = "v1.1.0";
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
@@ -22,25 +24,23 @@ namespace CSus2Editor
         //FreeSO's weird messed up note index
         public string[] noteFSO = { "empty", "C", "D", "E", "F", "G", "A", "B", "H" };
 
+        //note(x).wav strings
         public static string[] noteFileName = { "empty", "E", "FS", "GS", "A", "B", "CS", "DS", "E2" };
 
+        //note index array
         public static int[] indexList;
 
-        public static int pnlScroll = 0;
+        //Sound player for playing note sounds
+        public static SoundPlayer notes = new SoundPlayer();
 
         public mainWindow()
         {
-
             InitializeComponent();
-
         }
-
-        public static SoundPlayer notes = new SoundPlayer();
 
         //On loading, set initial values
         private void windowLoad(object sender, EventArgs e)
         {
-
             //Set default values
             nud_seqLength.Value = 16;
             nud_addColumns.Value = 1;
@@ -54,10 +54,9 @@ namespace CSus2Editor
 
         }//End windowLoad
 
-        //Generate panels based on sequence length
+        //Generate panels based on requested length
         public void generateNewPanels(int panels)
         {
-
             //CLear previous panels
             pnl_buttons.Controls.Clear();
             noteCols.Clear();
@@ -68,18 +67,21 @@ namespace CSus2Editor
             //For sequence length, make and place new usercontrols
             for (int i = 0; i < panels; i++)
             {
-
+                //New note column
                 NoteColumn notes = new NoteColumn();
 
+                //Move to end of existing notecolumns
                 notes.Location = new Point((i * notes.Width), -10);
                 notes.index = i;
 
+                //Add to panel's controls
                 pnl_buttons.Controls.Add(notes);
                 
+                //Get time signature color and apply to richtextbox
                 notes.rtb_notes.BackColor = beatColor(i);
 
+                //Add note column to list
                 noteCols.Add(notes);
-
             }
 
             //Remove vertical scrollbar (weird workaround)
@@ -93,7 +95,6 @@ namespace CSus2Editor
         //On changing sequence length and clicking generate new sequence
         private void clickGenerate(object sender, EventArgs e)
         {
-
             generateNewPanels((int)nud_seqLength.Value);
             
         }//End clickGenerate
@@ -101,15 +102,12 @@ namespace CSus2Editor
         //Update note sequence
         private void clickUpdate(object sender, EventArgs e)
         {
-
             string sequence = "";
-
             int interval = 0;
 
             //Get each note and add sequence
             for (int i = 0; i < noteCols.Count; i++)
             {
-
                 interval = (int)nud_noteInterval.Value;
 
                 if (indexList[i] != 0)
@@ -140,9 +138,7 @@ namespace CSus2Editor
                             }
                             else //If end of song reached, add default interval instead of sum of intervals
                             {
-
                                 interval = (int)nud_noteInterval.Value;
-
                             }
                         }
                     }
@@ -218,12 +214,13 @@ namespace CSus2Editor
             songTime.Interval = (int)nud_noteInterval.Value * 33;
 
             //Find first non-empty note
-            for (int i = 0; i < indexList.Length; i++) {
-                if (indexList[i] != 0) {
+            for (int i = 0; i < indexList.Length; i++)
+            {
+                if (indexList[i] != 0)
+                {
                     //Set played note index to first non-empty note
                     songNote = i;
                     goto EndFor;
-
                 }
             }
             EndFor: int endFor;
@@ -231,12 +228,12 @@ namespace CSus2Editor
             //Start timer
             songTime.Enabled = true;
             btn_playSong.Text = STOP_SONG_TEXT;
+
         }//End clickListen
 
         //Tick process for timer to play song
         private void nextTick(object Sender, EventArgs e)
         {
-
             //Color current column
             noteCols[songNote].setColorRTB(Color.LemonChiffon);
 
@@ -302,7 +299,6 @@ namespace CSus2Editor
         //Add specified number of new columns
         private void clickAddColumns(object sender, EventArgs e)
         {
-            
             //Stop columns from going over 100
             if(indexList.Length == 100)
             {
@@ -318,9 +314,7 @@ namespace CSus2Editor
 
             if (indexList.Length + nud_addColumns.Value > 100)
             {
-
                 addValue = 100 - indexList.Length;
-
             }
 
             //Old number of columns
@@ -418,9 +412,7 @@ namespace CSus2Editor
             //Parse columns and change color
             for (int i = 0; i < noteCols.Count; i++)
             {
-
                 noteCols[i].setColorRTB(beatColor(i));
-
             }
         }//End refreshColumns
 

@@ -12,7 +12,6 @@ namespace CSus2Editor.form
 {
     public partial class loadWindow : Form
     {
-
         public loadWindow()
         {
             InitializeComponent();
@@ -31,7 +30,6 @@ namespace CSus2Editor.form
         {
             if(e.KeyCode == Keys.Enter)
             {
-
                 string loadSeq = "";
 
                 //Get sequence from text box
@@ -45,7 +43,6 @@ namespace CSus2Editor.form
 
                 //Close load window
                 loadWindow.ActiveForm.Close();
-
             }
         }//End pressEnter
     }
