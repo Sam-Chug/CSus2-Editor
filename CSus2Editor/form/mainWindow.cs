@@ -396,6 +396,12 @@ namespace CSus2Editor
                 addValue = -(indexList.Length - 1);
             }
 
+            //Cap removal of columns to range of columns between the edit location and the end of song
+            if (addIndex + -addValue > indexList.Length)
+            {
+                addValue = -(indexList.Length - addIndex);
+            }
+
             //Old number of columns
             int oldSize = indexList.Length;
 
