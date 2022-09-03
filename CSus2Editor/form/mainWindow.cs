@@ -10,8 +10,10 @@ using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Reflection;
 
-namespace CSus2Editor {
-    public partial class mainWindow : Form {
+namespace CSus2Editor
+{
+    public partial class mainWindow : Form
+    {
         //So I dont forget to change it in the texts again lmao
         public static string version = "v1.1.2";
 
@@ -79,7 +81,8 @@ namespace CSus2Editor {
             indexList = new int[panels];
 
             //For sequence length, make and place new usercontrols
-            for (int i = 0; i < panels; i++) {
+            for (int i = 0; i < panels; i++)
+            {
                 //New note column
                 NoteColumn notes = new NoteColumn();
 
@@ -113,64 +116,81 @@ namespace CSus2Editor {
             string sequence = "";
             int interval = 0;
 
-            bool introCheck = true;
+            //Get length of empty space at beginning of sequence
+            for (int i = 0; i < indexList.Length; i++)
+            {
+                //Exit when note found
+                if (indexList[i] == 0)
+                {
+                    interval += (int)nud_noteInterval.Value;
+                }
+                else goto EndIntroCheck;
+
+            }
+        EndIntroCheck: int endIntroCheck;
+
+            //Write empty space to beginning of output sequence
+            sequence += "I" + interval;
 
             //Get each note and add sequence
-            for (int i = 0; i < noteCols.Count; i++) {
+            for (int i = 0; i < indexList.Length; i++)
+            {
+
                 interval = (int)nud_noteInterval.Value;
 
-                if (indexList[i] == 0 && introCheck) {
+                //If note not empty
+                if (indexList[i] != 0)
+                {
+                    sequence += noteFSO[indexList[i]];
+                }
 
-                    sequence += noteFSO[indexList[i]] + interval;
-                    goto IntroEnd;
-
-                } else {
-                    //If note not empty
-                    if (indexList[i] != 0) {
-                        introCheck = false;
-                        sequence += noteFSO[indexList[i]];
-                    }
-
-                    //Check if array has a following value
-                    if (indexList.Length > (i + 1)) {
-                        //If following note null
-                        if (indexList[i + 1] == 0) {
-                            //Find interval until next note
-                            for (int j = 0; j < (noteCols.Count - i); j++) {
-                                //Check if next note in search is null
-                                if (indexList.Length > (i + j + 1)) {
-                                    //If next search is null
-                                    if (indexList[i + j + 1] == 0) {
-                                        //Increment interval
-                                        interval += (int)nud_noteInterval.Value;
-                                    }
-                                    //If not null, end increment
-                                    else goto FollowingEnd;
-                                } else //If end of song reached, add default interval instead of sum of intervals
-                                  {
-                                    //Use number of empty spaces before outro, add that many null indexes with default interval
-                                    interval = (int)nud_noteInterval.Value;
-                                    sequence += interval;
-                                    //Combine empty values, except for the last one
-                                    if (interval * (j - 1) != 0) {
-
-                                        string outro = "I" + interval * (j - 1);
-                                        sequence += outro;
-                                    }
-                                    //Add one last empty value with the master interval
-                                    sequence += "I" + interval;
-
-                                    //Exit generate loop
-                                    goto ExitFor;
+                //Check if array has a following value
+                if (indexList.Length > (i + 1))
+                {
+                    //If following note null
+                    if (indexList[i + 1] == 0)
+                    {
+                        //Find interval until next note
+                        for (int j = 0; j < (noteCols.Count - i); j++)
+                        {
+                            //Check if next note in search is null
+                            if (indexList.Length > (i + j + 1))
+                            {
+                                //If next search is null
+                                if (indexList[i + j + 1] == 0)
+                                {
+                                    //Increment interval
+                                    interval += (int)nud_noteInterval.Value;
                                 }
+                                //If not null, end increment
+                                else goto FollowingEnd;
+                            }
+                            else //If end of song reached, add default interval instead of sum of intervals
+                            {
+                                //Use number of empty spaces before outro, add that many null indexes with default interval
+                                interval = (int)nud_noteInterval.Value;
+                                sequence += interval;
+                                //Combine empty values, except for the last one
+                                if (interval * (j - 1) != 0)
+                                {
+
+                                    string outro = "I" + interval * (j - 1);
+                                    sequence += outro;
+                                }
+                                //Add one last empty value with the master interval
+                                sequence += "I" + interval;
+
+                                //Exit generate loop
+                                goto ExitFor;
                             }
                         }
-                    FollowingEnd: int followingEnd;
                     }
+                FollowingEnd: int followingEnd;
                 }
 
                 //Only write interval for non-null note index
-                if (indexList[i] != 0) {
+                if (indexList[i] != 0)
+                {
                     sequence += interval;
                 }
             IntroEnd: int introEnd;
@@ -185,14 +205,16 @@ namespace CSus2Editor {
         //Copy sequence to clipboard
         private void copyText(object sender, EventArgs e) {
             //Copy sequence to clipboard
-            if (tb_noteSequence.Text != "") {
+            if (tb_noteSequence.Text != "")
+            {
                 System.Windows.Forms.Clipboard.SetText(tb_noteSequence.Text);
             }
         }//End copyText
 
         //Upon resizing, fit panel to window
         private void resizeForm(object sender, EventArgs e) {
-            if (mainWindow.ActiveForm != null) {
+            if (mainWindow.ActiveForm != null)
+            {
                 //Process resizable controls
                 pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
                 lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
@@ -209,15 +231,19 @@ namespace CSus2Editor {
 
         //On clicking play song button
         private void clickListen(object sender, EventArgs e) {
-            if (songTime.Enabled) {
+            if (songTime.Enabled)
+            {
                 // Stop the song and reset the currently playing note's color.
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
-                if (songNote == 0) {
+                if (songNote == 0)
+                {
                     // The "previous note" is the final one.
                     noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
                     noteCols[noteCols.Count - 1].drawCrewmate(false);
-                } else {
+                }
+                else
+                {
                     noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
                     noteCols[songNote - 1].drawCrewmate(false);
                 }
@@ -236,8 +262,10 @@ namespace CSus2Editor {
             //Find first non-empty note if option is enabled
             if (!firstNote) goto EndFor;
 
-            for (int i = 0; i < indexList.Length; i++) {
-                if (indexList[i] != 0) {
+            for (int i = 0; i < indexList.Length; i++)
+            {
+                if (indexList[i] != 0)
+                {
                     //Set played note index to first non-empty note
                     songNote = i;
                     goto EndFor;
@@ -257,17 +285,21 @@ namespace CSus2Editor {
             noteCols[songNote].setColorRTB(Color.LemonChiffon);
 
             // Change the previous note to its original color.
-            if (songNote == 0) {
+            if (songNote == 0)
+            {
                 // The "previous note" is the final one.
                 noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
                 noteCols[noteCols.Count - 1].drawCrewmate(false);
-            } else {
+            }
+            else
+            {
                 noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
                 noteCols[songNote - 1].drawCrewmate(false);
             }
 
             //Play note if not null
-            if (indexList[songNote] != 0) {
+            if (indexList[songNote] != 0)
+            {
                 //Get note from folder
                 notes = new SoundPlayer(@".\sounds\note" + noteFileName[indexList[songNote]] + ".wav");
                 //Play note
@@ -276,19 +308,23 @@ namespace CSus2Editor {
                 noteCols[songNote].drawCrewmate(true);
             }
             //If null, draw crewmate at index equal to last non-null index
-            else {
+            else
+            {
                 noteCols[songNote].drawCrewmate(true);
             }
 
             //Check if end of note sequence reached
-            if (songNote + 1 < indexList.Length) {
+            if (songNote + 1 < indexList.Length)
+            {
                 //Play note if not end of sequence
                 songNote++;
-            } else if (loopCheckbox.Checked) // Loop back to beginning
-              {
+            }
+            else if (loopCheckbox.Checked) // Loop back to beginning
+            {
                 songNote = 0;
-            } else //Stop timer if end of sequence reached
-              {
+            }
+            else //Stop timer if end of sequence reached
+            {
                 //Force back to default
                 noteCols[songNote].setColorRTB(beatColor(songNote));
                 noteCols[songNote].drawCrewmate(false);
@@ -300,7 +336,8 @@ namespace CSus2Editor {
             bool restEmpty = true;
 
             //For the rest of the song
-            for (int i = songNote; i < indexList.Length; i++) {
+            for (int i = songNote; i < indexList.Length; i++)
+            {
                 //Check following notes if empty
                 restEmpty &= (indexList[i] == 0);
             }
@@ -333,14 +370,15 @@ namespace CSus2Editor {
             {
                 MessageBox.Show("Column limit reached!", "Warning!");
                 return;
-            }else if (indexList.Length == maxColumns && indexList.Length + addValue <= maxColumns)
+            }
+            else if (indexList.Length == maxColumns && indexList.Length + addValue <= maxColumns)
             {
                 MessageBox.Show("Column limit reached!", "Warning!");
                 return;
             }
 
             //Weird workaround for negative values deleting note at edit start location
-            if(addValue < 0)
+            if (addValue < 0)
             {
                 addIndex++;
             }
@@ -349,9 +387,12 @@ namespace CSus2Editor {
             pnl_buttons.HorizontalScroll.Value = 0;
 
             //Cap additions and subtractions to either 1 or the max column limit
-            if (indexList.Length + nud_addColumns.Value > maxColumns) {
+            if (indexList.Length + nud_addColumns.Value > maxColumns)
+            {
                 addValue = maxColumns - indexList.Length;
-            } else if (indexList.Length + nud_addColumns.Value < 1){
+            }
+            else if (indexList.Length + nud_addColumns.Value < 1)
+            {
                 addValue = -(indexList.Length - 1);
             }
 
@@ -376,7 +417,7 @@ namespace CSus2Editor {
                 else if (i >= addIndex && i <= (addIndex) + addValue)
                 {
                     //If i in range of original song length
-                    if(i <= (indexList.Length - 1))
+                    if (i <= (indexList.Length - 1))
                     {
                         //If note is present at column addition start
                         if (indexList[i] != 0 && i == addIndex)
@@ -416,7 +457,8 @@ namespace CSus2Editor {
 
         //Pressing enter on add columns box (QoL)
         private void addColumnsEnter(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
+            if (e.KeyCode == Keys.Enter)
+            {
                 //Add new columns
                 clickAddColumns(null, e);
             }
@@ -435,14 +477,17 @@ namespace CSus2Editor {
             if (!measureLines) goto SkipColor;
 
             //Beats
-            if ((i + 1) % quarters == 1) {
+            if ((i + 1) % quarters == 1)
+            {
                 c = Color.LightBlue;
             }
             //Measures
-            if ((i + 1) % (beats * quarters) == 1) {
+            if ((i + 1) % (beats * quarters) == 1)
+            {
                 c = Color.LightCoral;
             }
-            if ((i + 1) % (beats * beats * quarters) == 1) {
+            if ((i + 1) % (beats * beats * quarters) == 1)
+            {
                 c = Color.Plum;
             }
 
@@ -456,7 +501,8 @@ namespace CSus2Editor {
         //Refresh columns after changing time signature
         public static void refreshColumns() {
             //Parse columns and change color
-            for (int i = 0; i < noteCols.Count; i++) {
+            for (int i = 0; i < noteCols.Count; i++)
+            {
                 noteCols[i].setColorRTB(beatColor(i));
             }
         }//End refreshColumns
@@ -467,59 +513,73 @@ namespace CSus2Editor {
             bool numCheck = false;
             bool letterCheck = false;
 
-            for (int i = 0; i < seq.Length; i++) {
+            for (int i = 0; i < seq.Length; i++)
+            {
                 //Lower case check
-                if (char.IsLetter(seq[i]) && char.IsLower(seq[i])) {
+                if (char.IsLetter(seq[i]) && char.IsLower(seq[i]))
+                {
                     error = true;
                 }
 
                 //Check if there are numbers
-                if (char.IsNumber(seq[i])) {
+                if (char.IsNumber(seq[i]))
+                {
                     numCheck = true;
                 }
 
                 //Check if each note follows FreeSO's notation
-                if (char.IsLetter(seq[i])) {
+                if (char.IsLetter(seq[i]))
+                {
                     bool notationCheck = false;
 
-                    for (int j = 0; j < noteFSO.Length; j++) {
-                        if (Convert.ToString(seq[i]) == noteFSO[j]) {
+                    for (int j = 0; j < noteFSO.Length; j++)
+                    {
+                        if (Convert.ToString(seq[i]) == noteFSO[j])
+                        {
                             notationCheck = true;
                             letterCheck = true;
                         }
                     }
-                    if (!notationCheck) {
+                    if (!notationCheck)
+                    {
                         error = true;
                     }
                 }
 
                 //Make sure letter always follows number
-                if (i > 0) {
-                    if (char.IsLetter(seq[i]) && !char.IsNumber(seq[i - 1])) {
+                if (i > 0)
+                {
+                    if (char.IsLetter(seq[i]) && !char.IsNumber(seq[i - 1]))
+                    {
                         error = true;
                     }
                 }
 
                 //Check if letters follow another
-                if (seq.Length < (i + 1)) {
-                    if (char.IsLetter(seq[i]) && char.IsLetter(seq[i + 1])) {
+                if (seq.Length < (i + 1))
+                {
+                    if (char.IsLetter(seq[i]) && char.IsLetter(seq[i + 1]))
+                    {
                         error = true;
                     }
                 }
 
                 //Make sure last character is a number
-                if (!char.IsDigit(seq[seq.Length - 1])) {
+                if (!char.IsDigit(seq[seq.Length - 1]))
+                {
                     error = true;
                 }
             }
 
             //Check for numbers and valid letters
-            if (!numCheck || !letterCheck) {
+            if (!numCheck || !letterCheck)
+            {
                 error = true;
             }
 
             //If error found, show warning and do not pass to loading
-            if (error) {
+            if (error)
+            {
                 MessageBox.Show("This sequence does not follow the input format!", "Warning!");
                 return;
             }
@@ -537,19 +597,25 @@ namespace CSus2Editor {
             List<int> noteInt = new List<int>();
 
             //Split string into each note with it's interval
-            for (int i = 0; i < seq.Length; i++) {
+            for (int i = 0; i < seq.Length; i++)
+            {
                 //If note is letter, start new entry
-                if (char.IsLetter(seq[i])) {
+                if (char.IsLetter(seq[i]))
+                {
                     //Start new note on letter
                     noteParse = Convert.ToString(seq[i]);
-                } else {
+                }
+                else
+                {
                     //Add numbers to end of letter
                     noteParse += seq[i];
                 }
 
                 //If next character is letter, add entry to parsed notes
-                if (seq.Length > i + 1) {
-                    if (char.IsLetter(seq[i + 1])) {
+                if (seq.Length > i + 1)
+                {
+                    if (char.IsLetter(seq[i + 1]))
+                    {
                         noteHolder.Add(noteParse);
                     }
                 }
@@ -558,15 +624,18 @@ namespace CSus2Editor {
             }//End for
 
             //Get index of note and interval total
-            for (int i = 0; i < noteHolder.Count; i++) {
+            for (int i = 0; i < noteHolder.Count; i++)
+            {
                 //Get string at location in loaded note index
                 string s = noteHolder[i];
                 int noteIndex = 0;
 
                 //Find number value of loaded notes
-                for (int j = 0; j < noteFSO.Length; j++) {
+                for (int j = 0; j < noteFSO.Length; j++)
+                {
                     //Check against FreeSO's notes
-                    if (Convert.ToString(s[0]) == noteFSO[j]) {
+                    if (Convert.ToString(s[0]) == noteFSO[j])
+                    {
                         //Get index value of note
                         noteIndex = j;
                         //Replace noteholder value with index
@@ -586,7 +655,8 @@ namespace CSus2Editor {
             nud_noteInterval.Value = interval;
 
             //Process loaded intervals against master interval to get column interval
-            for (int i = 0; i < noteInt.Count; i++) {
+            for (int i = 0; i < noteInt.Count; i++)
+            {
                 noteInt[i] = noteInt[i] / interval;
             }
 
@@ -600,15 +670,18 @@ namespace CSus2Editor {
             int wait = 0;
 
             //Fill index list with notes, based on length between each note
-            for (int i = 0; i < indexList.Length; i++) {
+            for (int i = 0; i < indexList.Length; i++)
+            {
                 //If interval is finished
-                if (wait == 0) {
+                if (wait == 0)
+                {
                     //Add note and go to next interval
                     indexList[i] = int.Parse(noteHolder[parse]);
                     wait = noteInt[parse];
 
                     //Place loaded note in proper location on number column
-                    if (int.Parse(noteHolder[parse]) != 0) {
+                    if (int.Parse(noteHolder[parse]) != 0)
+                    {
                         noteCols[i].placeNote(7 - (int.Parse(noteHolder[parse]) - 1));
                     }
 
