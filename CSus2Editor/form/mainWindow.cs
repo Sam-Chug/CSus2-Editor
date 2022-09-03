@@ -147,8 +147,14 @@ namespace CSus2Editor {
                                     //Use number of empty spaces before outro, add that many null indexes with default interval
                                     interval = (int)nud_noteInterval.Value;
                                     sequence += interval;
-                                    string outro = String.Concat(Enumerable.Repeat("I" + interval, j));
-                                    sequence += outro;
+                                    //Combine empty values, except for the last one
+                                    if (interval * (j - 1) != 0) {
+
+                                        string outro = "I" + interval * (j - 1);
+                                        sequence += outro;
+                                    }
+                                    //Add one last empty value with the master interval
+                                    sequence += "I" + interval;
 
                                     //Exit generate loop
                                     goto ExitFor;
