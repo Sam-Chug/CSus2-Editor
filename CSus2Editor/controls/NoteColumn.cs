@@ -7,10 +7,8 @@ using System.Media;
 using System.Runtime.InteropServices;
 using System.Linq;
 
-namespace CSus2Editor
-{
-    public partial class NoteColumn : UserControl
-    {
+namespace CSus2Editor {
+    public partial class NoteColumn : UserControl {
         //Real note index
         public static string[] noteIndex = { "E", "F#", "G#", "A", "B", "C#", "D#", "E2" };
 
@@ -21,14 +19,12 @@ namespace CSus2Editor
         int mouseX;
         int mouseY;
 
-        public NoteColumn()
-        {
+        public NoteColumn() {
             InitializeComponent();
         }
 
         //On load, populate button list
-        private void controlLoad(object sender, EventArgs e)
-        {
+        private void controlLoad(object sender, EventArgs e) {
             //Format richtextbox
             formatRTBText();
 
@@ -38,8 +34,7 @@ namespace CSus2Editor
         }//End controlLoad
 
         //Set richtextbox text, center it, and add it's # position in the column list
-        private void formatRTBText()
-        {
+        private void formatRTBText() {
             //Format note texts
             rtb_notes.Text = "\r\nE2\r\n\r\nD#\r\n\r\nC#\r\n\r\nB\r\n\r\nA\r\n\r\nG#\r\n\r\nF#\r\n\r\nE\r\n\r\n" + (index + 1);
             rtb_notes.SelectAll();
@@ -48,13 +43,10 @@ namespace CSus2Editor
         }//End formatRTBText
 
         //Clear note selection and formatting
-        private void clearNote(object sender, EventArgs e)
-        {
+        private void clearNote(object sender, EventArgs e) {
             //Clear previous button
-            foreach (Control c in pnl_Buttons.Controls)
-            {
-                if (c is NoteButton)
-                {
+            foreach (Control c in pnl_Buttons.Controls) {
+                if (c is NoteButton) {
                     pnl_Buttons.Controls.Remove(c);
                     mainWindow.indexList[index] = 0;
                 }
@@ -62,21 +54,18 @@ namespace CSus2Editor
         }//End clearNote
 
         //Set backcolor of richtextbox
-        public void setColorRTB(Color color)
-        {
+        public void setColorRTB(Color color) {
             rtb_notes.BackColor = color;
 
         }//End setColorRTB
 
         //This whole thing is sus
-        public void drawCrewmate(bool alive)
-        {
+        public void drawCrewmate(bool alive) {
             //Check for draw cremate option
             if (!mainWindow.drawCremate) return;
 
             //Generate crewmate at note
-            if (alive)
-            {
+            if (alive) {
                 //If no notes, skip drawing - workaround for getting stuck in loop
                 if (mainWindow.indexList.Sum() == 0) return;
 
@@ -91,13 +80,10 @@ namespace CSus2Editor
                 if (!mainWindow.drawCrewmateEmpty) goto EndFor;
 
                 //Workaround for weird behavior at index 0
-                if(index == 0 && mainWindow.indexList[index] == 0)
-                {
+                if (index == 0 && mainWindow.indexList[index] == 0) {
                     //Search ahead for first non-null note
-                    for (int i = 0; i < mainWindow.indexList.Length; i++)
-                    {
-                        if (mainWindow.indexList[i] != 0)
-                        {
+                    for (int i = 0; i < mainWindow.indexList.Length; i++) {
+                        if (mainWindow.indexList[i] != 0) {
                             //Set Y to last value in indexlist
                             crewmateY = mainWindow.indexList[i];
                             goto EndFor;
@@ -106,23 +92,17 @@ namespace CSus2Editor
                 }
 
                 //Backwards search to find first non-null note
-                if (mainWindow.indexList[index] == 0)
-                {
-                    for (int i = (mainWindow.indexList[index] - (mainWindow.indexList[index] - index)); i--> 0;)
-                    {
+                if (mainWindow.indexList[index] == 0) {
+                    for (int i = (mainWindow.indexList[index] - (mainWindow.indexList[index] - index)); i-- > 0;) {
                         //Set crewmate location to last non-null note
-                        if (mainWindow.indexList[i] != 0)
-                        {
+                        if (mainWindow.indexList[i] != 0) {
                             crewmateY = mainWindow.indexList[i];
                             goto EndFor;
                         }
                         //If no non-null notes behind, search ahead for first non-null note
-                        if(i == 0)
-                        {
-                            for (int j = 0; j < mainWindow.indexList.Length; j++)
-                            {
-                                if (mainWindow.indexList[j] != 0)
-                                {
+                        if (i == 0) {
+                            for (int j = 0; j < mainWindow.indexList.Length; j++) {
+                                if (mainWindow.indexList[j] != 0) {
                                     crewmateY = mainWindow.indexList[j];
                                     goto EndFor;
                                 }
@@ -130,7 +110,7 @@ namespace CSus2Editor
                         }
                     }
                 }
-                EndFor: int endFor;
+            EndFor: int endFor;
 
                 //Set min Y
                 crewmateY = Math.Min(crewmateY, 7);
@@ -147,14 +127,11 @@ namespace CSus2Editor
             }
 
             //Kill crewmate after note passed
-            else
-            {
+            else {
                 //Find crewmate in vents
-                foreach (Control c in pnl_Buttons.Controls)
-                {
+                foreach (Control c in pnl_Buttons.Controls) {
                     //Crewmate gets voted out
-                    if(c is Crewmate)
-                    {
+                    if (c is Crewmate) {
                         pnl_Buttons.Controls.Remove(c);
                     }
                 }
@@ -162,8 +139,7 @@ namespace CSus2Editor
         }//End drawCrewmate
 
         //Find position of mouse inside note column
-        private void mouseMove(object sender, MouseEventArgs e)
-        {
+        private void mouseMove(object sender, MouseEventArgs e) {
             //Get mouse X and Y
             mouseX = e.Location.X;
             mouseY = e.Location.Y;
@@ -171,28 +147,24 @@ namespace CSus2Editor
         }//End mouseMove
 
         //Process clicked spot on note column
-        private void mouseClick(object sender, EventArgs e)
-        {
+        private void mouseClick(object sender, EventArgs e) {
             getAreaClicked();
 
         }//End mouseClick
 
         //Process note clicked and apply to note index
-        private void getAreaClicked()
-        {
+        private void getAreaClicked() {
             //Get y index position
             int y = (mouseY - 10) / 36;
 
             //Check if note in range
-            if (y <= 7)
-            {
+            if (y <= 7) {
                 //Clear previous note
                 clearNote(null, null);
                 //Place new note
                 placeNote(y);
-            }
-            else return;
-            
+            } else return;
+
             //Play seleced note
             mainWindow.notes = new SoundPlayer(@".\sounds\note" + mainWindow.noteFileName[noteIndex.Length - y] + ".wav");
             mainWindow.notes.Play();
@@ -200,8 +172,7 @@ namespace CSus2Editor
         }//End getAreaClicked
 
         //Place note at specified location in column
-        public void placeNote(int y)
-        {
+        public void placeNote(int y) {
             //Create new button control
             NoteButton highlight = new NoteButton();
             pnl_Buttons.Controls.Add(highlight);
