@@ -180,6 +180,7 @@ namespace CSus2Editor {
             //Set formatting on button
             highlight.index = index;
             highlight.Location = new Point(0, (y * 36) + 9);
+            Debug.WriteLine("int y: " + y);
             highlight.setText(noteIndex[noteIndex.Length - (y + 1)]);
             highlight.BringToFront();
 

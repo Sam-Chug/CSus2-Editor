@@ -52,6 +52,14 @@ namespace CSus2Editor {
 
         }//End loadSequence
 
+        private void clickNewSequence(object sender, EventArgs e) {
+            //Generate new sequence based on the size of one measure
+            generateNewPanels(Math.Min(beats * quarters, maxColumns));
+
+        }
+
+        //OPTIONS//
+
         //Option to play from first note or from beginning of sequence
         private void clickFirstNote(object sender, EventArgs e) {
             firstNote ^= true;
@@ -82,5 +90,7 @@ namespace CSus2Editor {
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
         }//End clickCMDrawEmpty
+
+        
     }
 }

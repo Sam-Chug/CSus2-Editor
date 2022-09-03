@@ -42,29 +42,36 @@ namespace CSus2Editor {
         //On loading, set initial values
         private void windowLoad(object sender, EventArgs e) {
             //Set default values
-            nud_seqLength.Value = 16;
             nud_addColumns.Value = 1;
             nud_noteInterval.Value = 5;
+
+            //Default options
             options_firstNote.Checked = firstNote;
             options_showCrewmate.Checked = drawCremate;
             options_measureLines.Checked = measureLines;
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
-            //Set columns to max
-            nud_seqLength.Maximum = maxColumns;
-            nud_addColumns.Maximum = maxColumns;
-
-            //Generate note columns
-            generateNewPanels((int)nud_seqLength.Value);
+            //Generate one measure of note columns
+            generateNewPanels(beats * quarters);
 
             //Set tick to timer
             songTime.Tick += new EventHandler(nextTick);
 
         }//End windowLoad
 
+        //Call whenever adding or removing columns
+        private void addColumnRange() {
+            //Set add columns min/max to length of note columns
+            nud_addColumns.Maximum = maxColumns - indexList.Length;
+            nud_addColumns.Minimum = -indexList.Length;
+            //Set column edit location min/max to length of columns or 1
+            nud_insertColumn.Maximum = indexList.Length;
+            nud_insertColumn.Minimum = 1;
+        }
+
         //Generate panels based on requested length
         public void generateNewPanels(int panels) {
-            //CLear previous panels
+            //Clear previous panels
             pnl_buttons.Controls.Clear();
             noteCols.Clear();
 
@@ -96,13 +103,10 @@ namespace CSus2Editor {
             pnl_buttons.VerticalScroll.Visible = false;
             pnl_buttons.AutoScroll = true;
 
+            //Set min/max for editing columns
+            addColumnRange();
+
         }//End generateNewPanels
-
-        //On changing sequence length and clicking generate new sequence
-        private void clickGenerate(object sender, EventArgs e) {
-            generateNewPanels((int)nud_seqLength.Value);
-
-        }//End clickGenerate
 
         //Update note sequence
         private void clickUpdate(object sender, EventArgs e) {
@@ -315,20 +319,40 @@ namespace CSus2Editor {
 
         //Add specified number of new columns
         private void clickAddColumns(object sender, EventArgs e) {
-            //Stop columns from going over 100
-            if (indexList.Length == maxColumns) {
+
+            //Get values for edit length and location
+            int addValue = (int)nud_addColumns.Value;
+            int addIndex = (int)nud_insertColumn.Value - 1;
+
+            //Stop song if currently playing
+            songTime.Enabled = false;
+            btn_playSong.Text = PLAY_SONG_TEXT;
+
+            //Stop columns from going over limit value
+            if (indexList.Length == 1 && indexList.Length + addValue <= 1)
+            {
                 MessageBox.Show("Column limit reached!", "Warning!");
                 return;
+            }else if (indexList.Length == maxColumns && indexList.Length + addValue <= maxColumns)
+            {
+                MessageBox.Show("Column limit reached!", "Warning!");
+                return;
+            }
+
+            //Weird workaround for negative values deleting note at edit start location
+            if(addValue < 0)
+            {
+                addIndex++;
             }
 
             //Reset scroll to 0 to stop bug
             pnl_buttons.HorizontalScroll.Value = 0;
 
-            //number of columns to add
-            int addValue = (int)nud_addColumns.Value;
-
+            //Cap additions and subtractions to either 1 or the max column limit
             if (indexList.Length + nud_addColumns.Value > maxColumns) {
                 addValue = maxColumns - indexList.Length;
+            } else if (indexList.Length + nud_addColumns.Value < 1){
+                addValue = -(indexList.Length - 1);
             }
 
             //Old number of columns
@@ -340,45 +364,55 @@ namespace CSus2Editor {
             //Temp new array
             int[] newIndex = new int[indexList.Length + addValue];
 
-            //Copy old index to new index
-            for (int i = 0; i < indexList.Length; i++) {
-                newIndex[i] = indexList[i];
-            }
+            //Copy old indexlist to new one
+            for (int i = 0; i < newIndex.Length; i++)
+            {
+                //If before new columns, copy index note
+                if (i < addIndex)
+                {
+                    newIndex[i] = indexList[i];
+                }
+                //If in range between new columns starting and ending
+                else if (i >= addIndex && i <= (addIndex) + addValue)
+                {
+                    //If i in range of original song length
+                    if(i <= (indexList.Length - 1))
+                    {
+                        //If note is present at column addition start
+                        if (indexList[i] != 0 && i == addIndex)
+                        {
+                            //Copy note to new index
+                            newIndex[i] = indexList[i];
+                        }
+                        else
+                        {
+                            //otherwise, make empty
+                            newIndex[i] = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    //If after added section of columns, copy notes at location minus added column amount
+                    newIndex[i] = indexList[i - addValue];
+                }
+            }//End for
 
-            //Apply new temp to indexList
+            //Generate new set of panels of new length
+            generateNewPanels(newIndex.Length);
+
+            //Apply new index to old index
             indexList = newIndex;
 
-            //Add specified number of new columns
-            for (int i = 0; i < addValue; i++) {
-                //New column
-                NoteColumn notes = new NoteColumn();
-
-                //Set variables
-                notes.Location = new Point((i + oldSize) * notes.Width, -10);
-                notes.index = (i + oldSize);
-
-                //Add to panel
-                pnl_buttons.Controls.Add(notes);
-
-                //Set backcolor based on index
-                notes.rtb_notes.BackColor = (beatColor(i + oldSize));
-
-                //Add to list
-                noteCols.Add(notes);
-
-                //Stupid workaround
-                indexList[0] = firstInd;
-
-            }//End for
-        }//End clickAddColumns
-
-        //Pressing enter on sequence length box (QoL)
-        private void setLengthEnter(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                //Generate new sequence
-                clickGenerate(null, e);
+            //Place notes where they should be
+            for (int i = 0; i < indexList.Length; i++)
+            {
+                if (indexList[i] != 0)
+                {
+                    noteCols[i].placeNote(7 - (indexList[i] - 1));
+                }
             }
-        }//End setLengthEnter
+        }//End clickAddColumns
 
         //Pressing enter on add columns box (QoL)
         private void addColumnsEnter(object sender, KeyEventArgs e) {
