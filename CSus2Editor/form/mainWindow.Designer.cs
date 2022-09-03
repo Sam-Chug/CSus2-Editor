@@ -58,9 +58,9 @@ namespace CSus2Editor
             this.lbl_UIVLine2 = new System.Windows.Forms.Label();
             this.loopCheckbox = new System.Windows.Forms.CheckBox();
             this.lbl_UIVLine1 = new System.Windows.Forms.Label();
-            this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             this.lbl_UIEditAfterColumn = new System.Windows.Forms.Label();
             this.nud_insertColumn = new System.Windows.Forms.NumericUpDown();
+            this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_addColumns)).BeginInit();
@@ -72,7 +72,7 @@ namespace CSus2Editor
             this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_noteSequence.Location = new System.Drawing.Point(4, 449);
             this.tb_noteSequence.Name = "tb_noteSequence";
-            this.tb_noteSequence.Size = new System.Drawing.Size(466, 49);
+            this.tb_noteSequence.Size = new System.Drawing.Size(475, 49);
             this.tb_noteSequence.TabIndex = 7;
             this.tb_noteSequence.Text = "";
             this.tb_noteSequence.Click += new System.EventHandler(this.copyText);
@@ -120,9 +120,9 @@ namespace CSus2Editor
             // btn_seqUpdate
             // 
             this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_seqUpdate.Location = new System.Drawing.Point(473, 448);
+            this.btn_seqUpdate.Location = new System.Drawing.Point(481, 448);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
-            this.btn_seqUpdate.Size = new System.Drawing.Size(80, 50);
+            this.btn_seqUpdate.Size = new System.Drawing.Size(72, 50);
             this.btn_seqUpdate.TabIndex = 8;
             this.btn_seqUpdate.Text = "Generate";
             this.btn_seqUpdate.UseVisualStyleBackColor = true;
@@ -346,15 +346,6 @@ namespace CSus2Editor
             this.lbl_UIVLine1.TabIndex = 20;
             this.lbl_UIVLine1.Text = "label3";
             // 
-            // pnl_buttons
-            // 
-            this.pnl_buttons.BackColor = System.Drawing.Color.White;
-            this.pnl_buttons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnl_buttons.Location = new System.Drawing.Point(4, 27);
-            this.pnl_buttons.Name = "pnl_buttons";
-            this.pnl_buttons.Size = new System.Drawing.Size(549, 343);
-            this.pnl_buttons.TabIndex = 0;
-            // 
             // lbl_UIEditAfterColumn
             // 
             this.lbl_UIEditAfterColumn.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -382,6 +373,15 @@ namespace CSus2Editor
             0,
             0,
             0});
+            // 
+            // pnl_buttons
+            // 
+            this.pnl_buttons.BackColor = System.Drawing.Color.White;
+            this.pnl_buttons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_buttons.Location = new System.Drawing.Point(4, 27);
+            this.pnl_buttons.Name = "pnl_buttons";
+            this.pnl_buttons.Size = new System.Drawing.Size(549, 343);
+            this.pnl_buttons.TabIndex = 0;
             // 
             // mainWindow
             // 

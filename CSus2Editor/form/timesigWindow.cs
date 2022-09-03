@@ -22,6 +22,10 @@ namespace CSus2Editor {
             //Set time signature label
             timeSigLabel();
 
+            //Set default values to current beat and quarter values
+            nud_beats.Value = mainWindow.beats;
+            nud_quarters.Value = mainWindow.quarters;
+
         }//End formLoad
 
         //Format time signature label

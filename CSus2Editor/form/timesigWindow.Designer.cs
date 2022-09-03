@@ -44,15 +44,17 @@
             // 
             this.lbl_UIPickSig.AutoSize = true;
             this.lbl_UIPickSig.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_UIPickSig.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UIPickSig.Location = new System.Drawing.Point(4, 4);
             this.lbl_UIPickSig.Name = "lbl_UIPickSig";
-            this.lbl_UIPickSig.Size = new System.Drawing.Size(110, 15);
+            this.lbl_UIPickSig.Size = new System.Drawing.Size(119, 17);
             this.lbl_UIPickSig.TabIndex = 0;
             this.lbl_UIPickSig.Text = "Pick a time signature:";
             // 
             // nud_quarters
             // 
-            this.nud_quarters.Location = new System.Drawing.Point(4, 47);
+            this.nud_quarters.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_quarters.Location = new System.Drawing.Point(4, 50);
             this.nud_quarters.Maximum = new decimal(new int[] {
             16,
             0,
@@ -64,7 +66,7 @@
             0,
             0});
             this.nud_quarters.Name = "nud_quarters";
-            this.nud_quarters.Size = new System.Drawing.Size(49, 20);
+            this.nud_quarters.Size = new System.Drawing.Size(49, 23);
             this.nud_quarters.TabIndex = 1;
             this.nud_quarters.Value = new decimal(new int[] {
             2,
@@ -77,7 +79,8 @@
             // 
             // nud_beats
             // 
-            this.nud_beats.Location = new System.Drawing.Point(4, 23);
+            this.nud_beats.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_beats.Location = new System.Drawing.Point(4, 24);
             this.nud_beats.Maximum = new decimal(new int[] {
             16,
             0,
@@ -89,7 +92,7 @@
             0,
             0});
             this.nud_beats.Name = "nud_beats";
-            this.nud_beats.Size = new System.Drawing.Size(49, 20);
+            this.nud_beats.Size = new System.Drawing.Size(49, 23);
             this.nud_beats.TabIndex = 2;
             this.nud_beats.Value = new decimal(new int[] {
             2,
@@ -103,26 +106,29 @@
             // lbl_UIBeats
             // 
             this.lbl_UIBeats.AutoSize = true;
+            this.lbl_UIBeats.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UIBeats.Location = new System.Drawing.Point(55, 26);
             this.lbl_UIBeats.Name = "lbl_UIBeats";
-            this.lbl_UIBeats.Size = new System.Drawing.Size(34, 13);
+            this.lbl_UIBeats.Size = new System.Drawing.Size(35, 15);
             this.lbl_UIBeats.TabIndex = 3;
             this.lbl_UIBeats.Text = "Beats";
             // 
             // lbl_UINotesPerBeat
             // 
             this.lbl_UINotesPerBeat.AutoSize = true;
+            this.lbl_UINotesPerBeat.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UINotesPerBeat.Location = new System.Drawing.Point(55, 50);
             this.lbl_UINotesPerBeat.Name = "lbl_UINotesPerBeat";
-            this.lbl_UINotesPerBeat.Size = new System.Drawing.Size(78, 13);
+            this.lbl_UINotesPerBeat.Size = new System.Drawing.Size(83, 15);
             this.lbl_UINotesPerBeat.TabIndex = 4;
             this.lbl_UINotesPerBeat.Text = "Notes per Beat";
             // 
             // btn_setNewSig
             // 
-            this.btn_setNewSig.Location = new System.Drawing.Point(134, 22);
+            this.btn_setNewSig.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_setNewSig.Location = new System.Drawing.Point(150, 24);
             this.btn_setNewSig.Name = "btn_setNewSig";
-            this.btn_setNewSig.Size = new System.Drawing.Size(91, 45);
+            this.btn_setNewSig.Size = new System.Drawing.Size(111, 50);
             this.btn_setNewSig.TabIndex = 5;
             this.btn_setNewSig.Text = "Set Time Signature";
             this.btn_setNewSig.UseVisualStyleBackColor = true;
@@ -131,9 +137,10 @@
             // lbl_newSig
             // 
             this.lbl_newSig.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbl_newSig.Location = new System.Drawing.Point(135, 4);
+            this.lbl_newSig.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_newSig.Location = new System.Drawing.Point(151, 4);
             this.lbl_newSig.Name = "lbl_newSig";
-            this.lbl_newSig.Size = new System.Drawing.Size(89, 15);
+            this.lbl_newSig.Size = new System.Drawing.Size(109, 18);
             this.lbl_newSig.TabIndex = 6;
             this.lbl_newSig.Text = "new-sig";
             // 
@@ -141,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 70);
+            this.ClientSize = new System.Drawing.Size(264, 77);
             this.Controls.Add(this.lbl_newSig);
             this.Controls.Add(this.btn_setNewSig);
             this.Controls.Add(this.lbl_UINotesPerBeat);

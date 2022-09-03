@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(helpWindow));
             this.pnl_UIHelp = new System.Windows.Forms.Panel();
-            this.rtb_helpText = new System.Windows.Forms.RichTextBox();
             this.lbl_UIFocusTarget = new System.Windows.Forms.Label();
+            this.rtb_helpText = new System.Windows.Forms.RichTextBox();
             this.pnl_UIHelp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,15 +45,6 @@
             this.pnl_UIHelp.Size = new System.Drawing.Size(394, 413);
             this.pnl_UIHelp.TabIndex = 0;
             // 
-            // rtb_helpText
-            // 
-            this.rtb_helpText.Location = new System.Drawing.Point(-2, -2);
-            this.rtb_helpText.Name = "rtb_helpText";
-            this.rtb_helpText.ReadOnly = true;
-            this.rtb_helpText.Size = new System.Drawing.Size(394, 413);
-            this.rtb_helpText.TabIndex = 0;
-            this.rtb_helpText.Text = "";
-            // 
             // lbl_UIFocusTarget
             // 
             this.lbl_UIFocusTarget.AutoSize = true;
@@ -61,6 +52,16 @@
             this.lbl_UIFocusTarget.Name = "lbl_UIFocusTarget";
             this.lbl_UIFocusTarget.Size = new System.Drawing.Size(0, 13);
             this.lbl_UIFocusTarget.TabIndex = 1;
+            // 
+            // rtb_helpText
+            // 
+            this.rtb_helpText.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_helpText.Location = new System.Drawing.Point(-2, -2);
+            this.rtb_helpText.Name = "rtb_helpText";
+            this.rtb_helpText.ReadOnly = true;
+            this.rtb_helpText.Size = new System.Drawing.Size(394, 413);
+            this.rtb_helpText.TabIndex = 0;
+            this.rtb_helpText.Text = "";
             // 
             // helpWindow
             // 
