@@ -7,8 +7,10 @@ using System.Media;
 using System.Runtime.InteropServices;
 using System.Linq;
 
-namespace CSus2Editor {
-    public partial class NoteColumn : UserControl {
+namespace CSus2Editor
+{
+    public partial class NoteColumn : UserControl
+    {
         //Real note index
         public static string[] noteIndex = { "E", "F#", "G#", "A", "B", "C#", "D#", "E2" };
 
@@ -163,7 +165,8 @@ namespace CSus2Editor {
                 clearNote(null, null);
                 //Place new note
                 placeNote(y);
-            } else return;
+            }
+            else return;
 
             //Play seleced note
             mainWindow.notes = new SoundPlayer(@".\sounds\note" + mainWindow.noteFileName[noteIndex.Length - y] + ".wav");

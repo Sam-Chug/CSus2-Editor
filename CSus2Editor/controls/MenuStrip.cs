@@ -6,8 +6,10 @@ using System.Diagnostics;
 using System.Media;
 using CSus2Editor.form;
 
-namespace CSus2Editor {
-    public partial class mainWindow {
+namespace CSus2Editor
+{
+    public partial class mainWindow
+    {
         bool firstNote = true;
         public static bool measureLines = true;
         public static bool drawCremate = true;
@@ -91,6 +93,6 @@ namespace CSus2Editor {
 
         }//End clickCMDrawEmpty
 
-        
+
     }
 }
