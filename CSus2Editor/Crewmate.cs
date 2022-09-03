@@ -6,13 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSus2Editor
-{
-    public class Crewmate : PictureBox
-    {
+namespace CSus2Editor {
+    public class Crewmate : PictureBox {
 
-        public Crewmate()
-        {
+        public Crewmate() {
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
@@ -22,7 +19,7 @@ namespace CSus2Editor
 
             Size = new Size(36, 36);
             BackColor = Color.LightGreen;
-            
+
         }
     }
 }

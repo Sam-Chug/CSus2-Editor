@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace CSus2Editor
-{
-    public partial class helpWindow : Form
-    {
+namespace CSus2Editor {
+    public partial class helpWindow : Form {
         //Get text from Readme file
         string helpText = System.IO.File.ReadAllText(@".\Readme.txt");
 
-        public helpWindow()
-        {
+        public helpWindow() {
             InitializeComponent();
         }
 
         //on loading help window
-        private void formLoad(object sender, EventArgs e)
-        {
+        private void formLoad(object sender, EventArgs e) {
             //Get text from Readme file
             rtb_helpText.Text = helpText;
             //Fake-disable richtextbox
@@ -33,8 +29,7 @@ namespace CSus2Editor
         }//End formLoad
 
         //Resize richtextbox with form
-        private void formResize(object sender, EventArgs e)
-        {
+        private void formResize(object sender, EventArgs e) {
             //Resize panel
             pnl_UIHelp.Width = (helpWindow.ActiveForm.Width - 24);
             pnl_UIHelp.Height = (helpWindow.ActiveForm.Height - 47);

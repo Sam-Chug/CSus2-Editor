@@ -8,18 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSus2Editor
-{
-    public partial class timesigWindow : Form
-    {
-        public timesigWindow()
-        {
+namespace CSus2Editor {
+    public partial class timesigWindow : Form {
+        public timesigWindow() {
             InitializeComponent();
         }
 
         //On form load
-        private void formLoad(object sender, EventArgs e)
-        {
+        private void formLoad(object sender, EventArgs e) {
             //Stop resize
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
@@ -29,15 +25,13 @@ namespace CSus2Editor
         }//End formLoad
 
         //Format time signature label
-        private void timeSigLabel()
-        {
+        private void timeSigLabel() {
             lbl_newSig.Text = "Signature: " + nud_beats.Value + "/" + nud_quarters.Value;
 
         }//End timeSigLabel
 
         //Finalize new time signature and pass values to main window
-        private void clickNewSig(object sender, EventArgs e)
-        {
+        private void clickNewSig(object sender, EventArgs e) {
 
             //Send values
             mainWindow.beats = (int)nud_beats.Value;
@@ -52,8 +46,7 @@ namespace CSus2Editor
         }//End clickNewSig
 
         //Change time signature label to reflect numericupdown values
-        private void changeNud(object sender, EventArgs e)
-        {
+        private void changeNud(object sender, EventArgs e) {
             timeSigLabel();
 
         }//End changeNud
