@@ -8,28 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSus2Editor.form
-{
-    public partial class loadWindow : Form
-    {
-        public loadWindow()
-        {
+namespace CSus2Editor.form {
+    public partial class loadWindow : Form {
+        public loadWindow() {
             InitializeComponent();
         }
 
         //On form load
-        private void formLoad(object sender, EventArgs e)
-        {
+        private void formLoad(object sender, EventArgs e) {
             //Stop resize
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
         }//End formLoad
 
         //On pressing enter in load window
-        private void pressEnter(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
+        private void pressEnter(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
                 string loadSeq = "";
 
                 //Get sequence from text box
