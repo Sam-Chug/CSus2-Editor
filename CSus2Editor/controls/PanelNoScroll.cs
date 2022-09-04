@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace CSus2Editor {
     //I got this whole thing from stackexchange lmao
@@ -27,7 +28,7 @@ namespace CSus2Editor {
             scrollLocation.Y = VerticalScroll.Value;
         }
 
-        protected override System.Drawing.Point ScrollToControl(Control activeControl) {
+        protected override Point ScrollToControl(Control activeControl) {
             // When there's only 1 control in the panel and the user clicks
             //  on it, .NET tries to scroll to the control. This invariably
             //  forces the panel to scroll up. This little hack prevents that.

@@ -54,6 +54,9 @@ namespace CSus2Editor
             options_followPlay.Checked = followPlayBar;
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
+            //Focus sequencer
+            focusSequencer();
+
             //Generate two measures of note columns
             generateNewPanels(2 * beats * quarters);
 
@@ -196,6 +199,10 @@ namespace CSus2Editor
 
         //On clicking play song button
         private void clickListen(object sender, EventArgs e) {
+
+            //Focus sequencer
+            focusSequencer();
+
             if (songTime.Enabled) {
                 // Stop the song and reset the currently playing note's color.
                 songTime.Enabled = false;
@@ -320,6 +327,9 @@ namespace CSus2Editor
             //Stop song if currently playing
             songTime.Enabled = false;
             btn_playSong.Text = PLAY_SONG_TEXT;
+
+            //Focus sequencer
+            focusSequencer();
 
             //Stop columns from going over limit value
             if (indexList.Length == 1 && indexList.Length + addValue <= 1) {
@@ -524,6 +534,9 @@ namespace CSus2Editor
             List<string> noteHolder = new List<string>();
             List<int> noteInt = new List<int>();
 
+            //Focus sequencer
+            focusSequencer();
+
             //Split string into each note with it's interval
             for (int i = 0; i < seq.Length; i++) {
                 //If note is letter, start new entry
@@ -632,5 +645,13 @@ namespace CSus2Editor
             //Return scroll position
             return pos;
         }//End moveScrollBar
+
+        //Set focus to sequencer
+        //Weird workaround to fix sequencer position from changing when clicking note for the first time
+        private void focusSequencer() {
+
+            pnl_buttons.Focus();
+
+        }//End focusSequencer
     }
 }
