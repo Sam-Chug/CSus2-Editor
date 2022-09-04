@@ -15,7 +15,7 @@ namespace CSus2Editor
     public partial class mainWindow : Form
     {
         //So I dont forget to change it in the texts again lmao
-        public static string version = "v1.2.0";
+        public static string version = "v1.2.1";
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
