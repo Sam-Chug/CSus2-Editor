@@ -115,7 +115,7 @@ namespace CSus2Editor
             EndFor: int endFor;
 
                 //Set min Y
-                crewmateY = Math.Min(crewmateY, 7);
+                crewmateY = Math.Min(crewmateY, 8);
 
                 //Set crewmate backcolor green if on note
                 if (mainWindow.indexList[index] != 0) crewmate.BackColor = Color.LightGreen;
