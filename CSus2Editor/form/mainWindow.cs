@@ -32,7 +32,7 @@ namespace CSus2Editor
         public static int[] indexList;
 
         //Max column amount
-        int maxColumns = 500;
+        int maxColumns = 1000;
 
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();
@@ -53,8 +53,8 @@ namespace CSus2Editor
             options_measureLines.Checked = measureLines;
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
-            //Generate one measure of note columns
-            generateNewPanels(beats * quarters);
+            //Generate two measures of note columns
+            generateNewPanels(2 * beats * quarters);
 
             //Set tick to timer
             songTime.Tick += new EventHandler(nextTick);
@@ -112,80 +112,57 @@ namespace CSus2Editor
 
         //Update note sequence
         private void clickUpdate(object sender, EventArgs e) {
+
+            //Sequence temp
             string sequence = "";
-            int interval = 0;
 
-            //Get length of empty space at beginning of sequence
+            //Note intervals
+            int masterInt = (int)nud_noteInterval.Value;
+            int noteInt = 0;
+
+            //If searching for next real note
+            bool parseNext = true;
+
             for (int i = 0; i < indexList.Length; i++) {
-                //Exit when note found
-                if (indexList[i] == 0) {
-                    interval += (int)nud_noteInterval.Value;
+
+                //Add note at end of sequence to preserve master interval
+                if (i == indexList.Length - 1) {
+                    sequence += noteFSO[indexList[i]] + masterInt;
+                    goto ExitFor;
                 }
-                else goto EndIntroCheck;
+                //If note parse enabled, write next real note to string
+                if (parseNext) {
 
-            }
-        EndIntroCheck: int endIntroCheck;
-
-            //Write empty space to beginning of output sequence
-            sequence += "I" + interval;
-
-            //Get each note and add sequence
-            for (int i = 0; i < indexList.Length; i++) {
-
-                interval = (int)nud_noteInterval.Value;
-
-                //If note not empty
-                if (indexList[i] != 0) {
+                    //Find and write correct note, then disable parse
                     sequence += noteFSO[indexList[i]];
+                    noteInt += masterInt;
+                    parseNext = false;
                 }
+                //Cutoff long interval at second-to-last note, to preserve final note's master interval
+                if (i == indexList.Length - 2) {
+                    sequence += noteInt;
+                    noteInt = 0;
+                    goto SkipOneLoop;
+                }
+                //If real note at next location, write interval after present note
+                if (i + 1 < indexList.Length) {
 
-                //Check if array has a following value
-                if (indexList.Length > (i + 1)) {
-                    //If following note null
-                    if (indexList[i + 1] == 0) {
-                        //Find interval until next note
-                        for (int j = 0; j < (noteCols.Count - i); j++) {
-                            //Check if next note in search is null
-                            if (indexList.Length > (i + j + 1)) {
-                                //If next search is null
-                                if (indexList[i + j + 1] == 0) {
-                                    //Increment interval
-                                    interval += (int)nud_noteInterval.Value;
-                                }
-                                //If not null, end increment
-                                else goto FollowingEnd;
-                            }
-                            else //If end of song reached, add default interval instead of sum of intervals
-                            {
-                                //Use number of empty spaces before outro, add that many null indexes with default interval
-                                interval = (int)nud_noteInterval.Value;
-                                sequence += interval;
-                                //Combine empty values, except for the last one
-                                if (interval * (j - 1) != 0) {
+                    if (indexList[i + 1] != 0) {
+                        //Write interval and reset to 0
+                        sequence += noteInt;
+                        noteInt = 0;
+                        //Enable parse for next real note
+                        parseNext = true;
 
-                                    string outro = "I" + interval * (j - 1);
-                                    sequence += outro;
-                                }
-                                //Add one last empty value with the master interval
-                                sequence += "I" + interval;
-
-                                //Exit generate loop
-                                goto ExitFor;
-                            }
-                        }
                     }
-                FollowingEnd: int followingEnd;
+                    else {
+                        noteInt += masterInt;
+                    }
                 }
-
-                //Only write interval for non-null note index
-                if (indexList[i] != 0) {
-                    sequence += interval;
-                }
-            IntroEnd: int introEnd;
+            SkipOneLoop: int skipOneLoop;
             }
         ExitFor: int exitFor;
 
-            //Set sequence text
             tb_noteSequence.Text = sequence;
 
         }//End clickUpdate

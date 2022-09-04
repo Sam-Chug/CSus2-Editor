@@ -55,8 +55,8 @@ namespace CSus2Editor
         }//End loadSequence
 
         private void clickNewSequence(object sender, EventArgs e) {
-            //Generate new sequence based on the size of four measures
-            generateNewPanels(Math.Min(beats * beats * quarters, maxColumns));
+            //Generate new sequence based on the size of two measures
+            generateNewPanels(Math.Min(2 * beats * quarters, maxColumns));
 
         }//End clickNewSequence
 
