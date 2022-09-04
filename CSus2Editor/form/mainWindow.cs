@@ -32,7 +32,7 @@ namespace CSus2Editor
         public static int[] indexList;
 
         //Max column amount
-        int maxColumns = 250;
+        int maxColumns = 500;
 
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();
