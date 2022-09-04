@@ -49,8 +49,9 @@ namespace CSus2Editor
 
             //Default options
             options_firstNote.Checked = firstNote;
-            options_showCrewmate.Checked = drawCremate;
             options_measureLines.Checked = measureLines;
+            options_followPlay.Checked = followPlayBar;
+            options_followPlay.Checked = followPlayBar;
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
             //Generate two measures of note columns
@@ -182,6 +183,7 @@ namespace CSus2Editor
                 pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
                 lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
                 lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+
             }
 
         }//End resizeForm
@@ -303,6 +305,8 @@ namespace CSus2Editor
                 songTime.Enabled = false;
                 btn_playSong.Text = PLAY_SONG_TEXT;
             }
+
+            pnl_buttons.HorizontalScroll.Value = moveScrollBar(songNote);
 
         }//End next tick
 
@@ -605,5 +609,28 @@ namespace CSus2Editor
                 wait--;
             }
         }//End loadSequence
+
+        //Center scroll bar around the play bar as it moves through the sequence
+        public int moveScrollBar(int column) {
+
+            int pos = 0;
+            int columnWidth = noteCols[column].Width;
+
+            //Set followed column to one at center of screen
+            int follow = column - (pnl_buttons.Width / 2) / noteCols[column].Width;
+
+            //Get percentage of column passed to apply to scrolbar's move position percent
+            double columnP = (double)(follow * noteCols[column].Width) / (noteCols.Count * columnWidth);
+
+            //Get position of new scrollbar position
+            pos = (int)(columnP * pnl_buttons.HorizontalScroll.Maximum);
+
+            //Clamp position to min and max scroll bar size
+            pos = Math.Max(pos, 0);
+            pos = Math.Min(pos, pnl_buttons.HorizontalScroll.Maximum);
+
+            //Return scroll position
+            return pos;
+        }//End moveScrollBar
     }
 }

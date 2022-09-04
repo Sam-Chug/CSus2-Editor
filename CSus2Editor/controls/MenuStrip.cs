@@ -14,6 +14,7 @@ namespace CSus2Editor
         public static bool measureLines = true;
         public static bool drawCremate = true;
         public static bool drawCrewmateEmpty = false;
+        public static bool followPlayBar = true;
 
         //On clicking about under help
         private void clickAbout(object sender, EventArgs e) {
@@ -61,6 +62,13 @@ namespace CSus2Editor
         }//End clickNewSequence
 
         //OPTIONS//
+
+        //Option to follow the playbar as the song plays
+        private void clickFollowPlay(object sender, EventArgs e) {
+            followPlayBar ^= true;
+            options_followPlay.Checked = followPlayBar;
+
+        }//End clickFollowPlay
 
         //Option to play from first note or from beginning of sequence
         private void clickFirstNote(object sender, EventArgs e) {

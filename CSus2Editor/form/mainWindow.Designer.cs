@@ -61,6 +61,7 @@ namespace CSus2Editor
             this.lbl_UIEditAfterColumn = new System.Windows.Forms.Label();
             this.nud_insertColumn = new System.Windows.Forms.NumericUpDown();
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
+            this.options_followPlay = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_addColumns)).BeginInit();
@@ -210,6 +211,7 @@ namespace CSus2Editor
             this.options_timeSignature,
             this.options_measureLines,
             this.options_firstNote,
+            this.options_followPlay,
             this.options_showCrewmate});
             this.ms_options.Name = "ms_options";
             this.ms_options.Size = new System.Drawing.Size(61, 22);
@@ -383,6 +385,13 @@ namespace CSus2Editor
             this.pnl_buttons.Size = new System.Drawing.Size(549, 343);
             this.pnl_buttons.TabIndex = 0;
             // 
+            // options_followPlay
+            // 
+            this.options_followPlay.Name = "options_followPlay";
+            this.options_followPlay.Size = new System.Drawing.Size(181, 22);
+            this.options_followPlay.Text = "Follow Play Bar";
+            this.options_followPlay.Click += new System.EventHandler(this.clickFollowPlay);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,6 +465,7 @@ namespace CSus2Editor
         private System.Windows.Forms.ToolStripMenuItem newSequenceToolStripMenuItem;
         private System.Windows.Forms.Label lbl_UIEditAfterColumn;
         private System.Windows.Forms.NumericUpDown nud_insertColumn;
+        private System.Windows.Forms.ToolStripMenuItem options_followPlay;
     }
 }
 
