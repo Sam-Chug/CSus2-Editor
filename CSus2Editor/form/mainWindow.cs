@@ -15,7 +15,7 @@ namespace CSus2Editor
     public partial class mainWindow : Form
     {
         //So I dont forget to change it in the texts again lmao
-        public static string version = "v1.2.1";
+        public static string version = "v1.2.2";
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
@@ -76,7 +76,7 @@ namespace CSus2Editor
             nud_addColumns.Minimum = -indexList.Length;
             //Set column edit location min/max to length of columns or 1
             nud_insertColumn.Maximum = indexList.Length;
-            nud_insertColumn.Minimum = 1;
+            nud_insertColumn.Minimum = 0;
         }
 
         //Generate panels based on requested length
@@ -190,9 +190,7 @@ namespace CSus2Editor
                 pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
                 lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
                 lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
-
             }
-
         }//End resizeForm
 
         //Song timer

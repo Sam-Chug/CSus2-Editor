@@ -47,6 +47,7 @@ namespace CSus2Editor
             this.options_timeSignature = new System.Windows.Forms.ToolStripMenuItem();
             this.options_measureLines = new System.Windows.Forms.ToolStripMenuItem();
             this.options_firstNote = new System.Windows.Forms.ToolStripMenuItem();
+            this.options_followPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.options_showCrewmate = new System.Windows.Forms.ToolStripMenuItem();
             this.cm_drawEmpty = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_Help = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@ namespace CSus2Editor
             this.lbl_UIEditAfterColumn = new System.Windows.Forms.Label();
             this.nud_insertColumn = new System.Windows.Forms.NumericUpDown();
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
-            this.options_followPlay = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_addColumns)).BeginInit();
@@ -73,7 +73,7 @@ namespace CSus2Editor
             this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_noteSequence.Location = new System.Drawing.Point(4, 449);
             this.tb_noteSequence.Name = "tb_noteSequence";
-            this.tb_noteSequence.Size = new System.Drawing.Size(475, 49);
+            this.tb_noteSequence.Size = new System.Drawing.Size(503, 49);
             this.tb_noteSequence.TabIndex = 7;
             this.tb_noteSequence.Text = "";
             this.tb_noteSequence.Click += new System.EventHandler(this.copyText);
@@ -121,7 +121,7 @@ namespace CSus2Editor
             // btn_seqUpdate
             // 
             this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_seqUpdate.Location = new System.Drawing.Point(481, 448);
+            this.btn_seqUpdate.Location = new System.Drawing.Point(509, 448);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
             this.btn_seqUpdate.Size = new System.Drawing.Size(72, 50);
             this.btn_seqUpdate.TabIndex = 8;
@@ -141,7 +141,7 @@ namespace CSus2Editor
             // btn_playSong
             // 
             this.btn_playSong.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_playSong.Location = new System.Drawing.Point(481, 377);
+            this.btn_playSong.Location = new System.Drawing.Point(509, 377);
             this.btn_playSong.Name = "btn_playSong";
             this.btn_playSong.Size = new System.Drawing.Size(72, 45);
             this.btn_playSong.TabIndex = 6;
@@ -170,7 +170,7 @@ namespace CSus2Editor
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(556, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -237,6 +237,13 @@ namespace CSus2Editor
             this.options_firstNote.Size = new System.Drawing.Size(181, 22);
             this.options_firstNote.Text = "Play at First Note";
             this.options_firstNote.Click += new System.EventHandler(this.clickFirstNote);
+            // 
+            // options_followPlay
+            // 
+            this.options_followPlay.Name = "options_followPlay";
+            this.options_followPlay.Size = new System.Drawing.Size(181, 22);
+            this.options_followPlay.Text = "Follow Play Bar";
+            this.options_followPlay.Click += new System.EventHandler(this.clickFollowPlay);
             // 
             // options_showCrewmate
             // 
@@ -382,21 +389,14 @@ namespace CSus2Editor
             this.pnl_buttons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnl_buttons.Location = new System.Drawing.Point(4, 27);
             this.pnl_buttons.Name = "pnl_buttons";
-            this.pnl_buttons.Size = new System.Drawing.Size(549, 343);
+            this.pnl_buttons.Size = new System.Drawing.Size(577, 343);
             this.pnl_buttons.TabIndex = 0;
-            // 
-            // options_followPlay
-            // 
-            this.options_followPlay.Name = "options_followPlay";
-            this.options_followPlay.Size = new System.Drawing.Size(181, 22);
-            this.options_followPlay.Text = "Follow Play Bar";
-            this.options_followPlay.Click += new System.EventHandler(this.clickFollowPlay);
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 501);
+            this.ClientSize = new System.Drawing.Size(584, 501);
             this.Controls.Add(this.nud_insertColumn);
             this.Controls.Add(this.lbl_UIEditAfterColumn);
             this.Controls.Add(this.lbl_UIHLine2);
@@ -417,7 +417,7 @@ namespace CSus2Editor
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(572, 540);
+            this.MinimumSize = new System.Drawing.Size(600, 540);
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csus2 Music Box Editor";
