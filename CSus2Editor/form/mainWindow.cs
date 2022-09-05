@@ -34,6 +34,10 @@ namespace CSus2Editor
         //Max column amount
         int maxColumns = 1000;
 
+        //Time signature vars
+        public static int beats = 4;
+        public static int quarters = 4;
+
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();
 
@@ -97,7 +101,7 @@ namespace CSus2Editor
                 pnl_buttons.Controls.Add(notes);
 
                 //Get time signature color and apply to richtextbox
-                notes.rtb_notes.BackColor = beatColor(i);
+                notes.rtb_notes.BackColor = NoteUtils.beatColor(i);
 
                 //Add note column to list
                 noteCols.Add(notes);
@@ -209,11 +213,11 @@ namespace CSus2Editor
                 btn_playSong.Text = PLAY_SONG_TEXT;
                 if (songNote == 0) {
                     // The "previous note" is the final one.
-                    noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+                    noteCols[noteCols.Count - 1].setColorRTB(NoteUtils.beatColor(noteCols.Count - 1));
                     noteCols[noteCols.Count - 1].drawCrewmate(false);
                 }
                 else {
-                    noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                    noteCols[songNote - 1].setColorRTB(NoteUtils.beatColor(songNote - 1));
                     noteCols[songNote - 1].drawCrewmate(false);
                 }
                 return;
@@ -254,11 +258,11 @@ namespace CSus2Editor
             // Change the previous note to its original color.
             if (songNote == 0) {
                 // The "previous note" is the final one.
-                noteCols[noteCols.Count - 1].setColorRTB(beatColor(noteCols.Count - 1));
+                noteCols[noteCols.Count - 1].setColorRTB(NoteUtils.beatColor(noteCols.Count - 1));
                 noteCols[noteCols.Count - 1].drawCrewmate(false);
             }
             else {
-                noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                noteCols[songNote - 1].setColorRTB(NoteUtils.beatColor(songNote - 1));
                 noteCols[songNote - 1].drawCrewmate(false);
             }
 
@@ -288,7 +292,7 @@ namespace CSus2Editor
             else //Stop timer if end of sequence reached
             {
                 //Force back to default
-                noteCols[songNote].setColorRTB(beatColor(songNote));
+                noteCols[songNote].setColorRTB(NoteUtils.beatColor(songNote));
                 noteCols[songNote].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
@@ -306,7 +310,7 @@ namespace CSus2Editor
             if (restEmpty && !loopCheckbox.Checked) //If all following notes empty, end song early
             {
                 //Force back to default
-                noteCols[songNote - 1].setColorRTB(beatColor(songNote - 1));
+                noteCols[songNote - 1].setColorRTB(NoteUtils.beatColor(songNote - 1));
                 noteCols[songNote - 1].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
@@ -423,42 +427,12 @@ namespace CSus2Editor
             }
         }//End addColumnsEnter
 
-        //Time signature vars
-        public int beats = 4;
-        public int quarters = 4;
-
-        //Use beat and quarters to color columns based on time signature
-        public Color beatColor(int i) {
-            //Default color
-            Color c = Color.White;
-
-            //Check if measure lines are enabled
-            if (!measureLines) return c;
-
-            //Quarters
-            if ((i + 1) % quarters == 1) {
-                c = Color.LightBlue;
-            }
-            //Beats
-            if ((i + 1) % (beats * quarters) == 1) {
-                c = Color.LightCoral;
-            }
-            //Measures
-            if ((i + 1) % (beats * beats * quarters) == 1) {
-                c = Color.Plum;
-            }
-
-            //Return color
-            return c;
-
-        }//End beatColor
-
         //Refresh columns after changing time signature
         public void refreshColumns() {
 
             //Parse columns and change color
             for (int i = 0; i < noteCols.Count; i++) {
-                noteCols[i].setColorRTB(beatColor(i));
+                noteCols[i].setColorRTB(NoteUtils.beatColor(i));
             }
         }//End refreshColumns
 

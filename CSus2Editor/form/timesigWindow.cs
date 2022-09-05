@@ -25,24 +25,21 @@ namespace CSus2Editor
             //Set time signature label
             changeNud(null, e);
 
-            //Get main window
-            mainWindow main = this.Owner as mainWindow;
-
             //Set default values to current beat and quarter values
-            nud_beats.Value = main.beats;
-            nud_quarters.Value = main.quarters;
+            nud_beats.Value = mainWindow.beats;
+            nud_quarters.Value = mainWindow.quarters;
 
         }//End formLoad
 
         //Finalize new time signature and pass values to main window
         private void clickNewSig(object sender, EventArgs e) {
 
+            //Send values
+            mainWindow.beats = (int)nud_beats.Value;
+            mainWindow.quarters = (int)nud_quarters.Value;
+
             //Get main window
             mainWindow main = this.Owner as mainWindow;
-
-            //Send values
-            main.beats = (int)nud_beats.Value;
-            main.quarters = (int)nud_quarters.Value;
 
             //Refresh columns
             main.refreshColumns();

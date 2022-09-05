@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controls\ControlExtensions.cs" />
+    <Compile Include="controls\NoteUtils.cs" />
     <Compile Include="Crewmate.cs">
       <SubType>Component</SubType>
     </Compile>

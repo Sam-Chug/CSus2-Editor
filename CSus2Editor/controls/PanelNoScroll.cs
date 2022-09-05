@@ -18,8 +18,8 @@ namespace CSus2Editor {
 
         void PanelNoScrollOnFocus_Enter(object sender, System.EventArgs e) {
             // Set the scroll location back when the control regains focus.
-            HorizontalScroll.Value = scrollLocation.X;
-            VerticalScroll.Value = scrollLocation.Y;
+            //HorizontalScroll.Value = scrollLocation.X;
+            //VerticalScroll.Value = scrollLocation.Y;
         }
 
         void PanelNoScrollOnFocus_Leave(object sender, System.EventArgs e) {
