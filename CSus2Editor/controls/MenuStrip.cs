@@ -43,7 +43,7 @@ namespace CSus2Editor
         //Open time signature window
         private void clickTimeSignature(object sender, EventArgs e) {
             timesigWindow timeSig = new timesigWindow();
-            timeSig.Show();
+            timeSig.ShowDialog(this);
 
         }//End clickTimeSignature
 

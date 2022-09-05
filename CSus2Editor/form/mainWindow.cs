@@ -313,7 +313,10 @@ namespace CSus2Editor
                 btn_playSong.Text = PLAY_SONG_TEXT;
             }
 
-            pnl_buttons.HorizontalScroll.Value = moveScrollBar(songNote);
+            //If "follow play bar" otpion enabled, scroll bar moves to play bar
+            if (followPlayBar) {
+                pnl_buttons.HorizontalScroll.Value = moveScrollBar(songNote);
+            }
 
         }//End next tick
 
@@ -421,30 +424,29 @@ namespace CSus2Editor
         }//End addColumnsEnter
 
         //Time signature vars
-        public static int beats = 4;
-        public static int quarters = 4;
+        public int beats = 4;
+        public int quarters = 4;
 
         //Use beat and quarters to color columns based on time signature
-        public static Color beatColor(int i) {
+        public Color beatColor(int i) {
             //Default color
             Color c = Color.White;
 
             //Check if measure lines are enabled
-            if (!measureLines) goto SkipColor;
+            if (!measureLines) return c;
 
-            //Beats
+            //Quarters
             if ((i + 1) % quarters == 1) {
                 c = Color.LightBlue;
             }
-            //Measures
+            //Beats
             if ((i + 1) % (beats * quarters) == 1) {
                 c = Color.LightCoral;
             }
+            //Measures
             if ((i + 1) % (beats * beats * quarters) == 1) {
                 c = Color.Plum;
             }
-
-        SkipColor: int skipColor;
 
             //Return color
             return c;
@@ -452,7 +454,8 @@ namespace CSus2Editor
         }//End beatColor
 
         //Refresh columns after changing time signature
-        public static void refreshColumns() {
+        public void refreshColumns() {
+
             //Parse columns and change color
             for (int i = 0; i < noteCols.Count; i++) {
                 noteCols[i].setColorRTB(beatColor(i));
@@ -630,7 +633,7 @@ namespace CSus2Editor
             int columnWidth = noteCols[column].Width;
 
             //Set followed column to one at center of screen
-            int follow = column - (pnl_buttons.Width / 2) / noteCols[column].Width;
+            int follow = column - ((pnl_buttons.Width / 2) / noteCols[column].Width) - 1;
 
             //Get percentage of column passed to apply to scrolbar's move position percent
             double columnP = (double)(follow * noteCols[column].Width) / (noteCols.Count * columnWidth);

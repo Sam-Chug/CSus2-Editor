@@ -23,6 +23,7 @@ namespace CSus2Editor.form {
 
         //On pressing enter in load window
         private void pressEnter(object sender, KeyEventArgs e) {
+            //Get enter keypress
             if (e.KeyCode == Keys.Enter) {
                 string loadSeq = "";
 
@@ -30,7 +31,7 @@ namespace CSus2Editor.form {
                 loadSeq = tb_sequence.Text;
 
                 //Grab mainwindow
-                mainWindow main = (this.Owner as mainWindow);
+                mainWindow main = this.Owner as mainWindow;
 
                 //Check validity of sequence, load if valid
                 main.loadValidity(loadSeq);
