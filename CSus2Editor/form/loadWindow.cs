@@ -34,7 +34,7 @@ namespace CSus2Editor.form {
                 mainWindow main = this.Owner as mainWindow;
 
                 //Check validity of sequence, load if valid
-                main.loadValidity(loadSeq);
+                main.loadSequence(loadSeq);
 
                 //Close load window
                 loadWindow.ActiveForm.Close();

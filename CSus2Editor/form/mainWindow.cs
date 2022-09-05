@@ -188,15 +188,20 @@ namespace CSus2Editor
             }
         }//End copyText
 
-        //Upon resizing, fit panel to window
+        //Upon resizing, fit controls to window
         private void resizeForm(object sender, EventArgs e) {
             if (mainWindow.ActiveForm != null) {
-                //Process resizable controls
+                //Only use control's size variables, other numbers only for adding margins
+
+                //Note column holder and horizontal lines
                 pnl_buttons.Width = mainWindow.ActiveForm.ClientSize.Width - 8;
                 lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
                 lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
 
+                //Generate sequence location
                 btn_seqUpdate.Location = new Point(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 3, btn_seqUpdate.Location.Y);
+                
+                //Sequence output size
                 tb_noteSequence.Size = new Size(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 9, mainWindow.ActiveForm.ClientSize.Height - tb_noteSequence.Location.Y - 4);
             }
         }//End resizeForm
@@ -451,76 +456,11 @@ namespace CSus2Editor
             }
         }//End refreshColumns
 
-        //Check validity of loaded sequence
-        public void loadValidity(string seq) {
-            bool error = false;
-            bool numCheck = false;
-            bool letterCheck = false;
-
-            for (int i = 0; i < seq.Length; i++) {
-                //Lower case check
-                if (char.IsLetter(seq[i]) && char.IsLower(seq[i])) {
-                    error = true;
-                }
-
-                //Check if there are numbers
-                if (char.IsNumber(seq[i])) {
-                    numCheck = true;
-                }
-
-                //Check if each note follows FreeSO's notation
-                if (char.IsLetter(seq[i])) {
-                    bool notationCheck = false;
-
-                    for (int j = 0; j < noteFSO.Length; j++) {
-                        if (Convert.ToString(seq[i]) == noteFSO[j]) {
-                            notationCheck = true;
-                            letterCheck = true;
-                        }
-                    }
-                    if (!notationCheck) {
-                        error = true;
-                    }
-                }
-
-                //Make sure letter always follows number
-                if (i > 0) {
-                    if (char.IsLetter(seq[i]) && !char.IsNumber(seq[i - 1])) {
-                        error = true;
-                    }
-                }
-
-                //Check if letters follow another
-                if (seq.Length < (i + 1)) {
-                    if (char.IsLetter(seq[i]) && char.IsLetter(seq[i + 1])) {
-                        error = true;
-                    }
-                }
-
-                //Make sure last character is a number
-                if (!char.IsDigit(seq[seq.Length - 1])) {
-                    error = true;
-                }
-            }
-
-            //Check for numbers and valid letters
-            if (!numCheck || !letterCheck) {
-                error = true;
-            }
-
-            //If error found, show warning and do not pass to loading
-            if (error) {
-                MessageBox.Show("This sequence does not follow the input format!", "Warning!");
-                return;
-            }
-
-            //Move on to loading sequence if it checks out
-            loadSequence(seq);
-
-        }//End loadValidity
-
         //Process note string and load into the sequencer
         public void loadSequence(string seq) {
+
+            if (NoteUtils.loadValidity(seq)) return;
+            
             string noteParse = "";
 
             List<string> noteHolder = new List<string>();
@@ -646,8 +586,10 @@ namespace CSus2Editor
 
         }//End focusSequencer
 
+        //Loop check
         bool loopSong = false;
 
+        //Set loop button's image based on looping disabled/enabled
         private void clickLoop(object sender, EventArgs e) {
 
             loopSong ^= true;
@@ -658,6 +600,6 @@ namespace CSus2Editor
             else {
                 btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
             }
-        }
+        }//End clickLoop
     }
 }
