@@ -36,7 +36,6 @@ namespace CSus2Editor
             this.nud_noteInterval = new System.Windows.Forms.NumericUpDown();
             this.btn_seqUpdate = new System.Windows.Forms.Button();
             this.lbl_UIHLine1 = new System.Windows.Forms.Label();
-            this.btn_playSong = new System.Windows.Forms.Button();
             this.lbl_UIHLine2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ms_File = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +45,6 @@ namespace CSus2Editor
             this.ms_options = new System.Windows.Forms.ToolStripMenuItem();
             this.options_timeSignature = new System.Windows.Forms.ToolStripMenuItem();
             this.options_measureLines = new System.Windows.Forms.ToolStripMenuItem();
-            this.options_firstNote = new System.Windows.Forms.ToolStripMenuItem();
             this.options_followPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.options_showCrewmate = new System.Windows.Forms.ToolStripMenuItem();
             this.cm_drawEmpty = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,10 +55,12 @@ namespace CSus2Editor
             this.nud_addColumns = new System.Windows.Forms.NumericUpDown();
             this.btn_addColumns = new System.Windows.Forms.Button();
             this.lbl_UIVLine2 = new System.Windows.Forms.Label();
-            this.loopCheckbox = new System.Windows.Forms.CheckBox();
             this.lbl_UIVLine1 = new System.Windows.Forms.Label();
             this.lbl_UIEditAfterColumn = new System.Windows.Forms.Label();
             this.nud_insertColumn = new System.Windows.Forms.NumericUpDown();
+            this.btn_loop = new System.Windows.Forms.Button();
+            this.btn_playStart = new System.Windows.Forms.Button();
+            this.btn_play = new System.Windows.Forms.Button();
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -73,7 +73,7 @@ namespace CSus2Editor
             this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_noteSequence.Location = new System.Drawing.Point(4, 449);
             this.tb_noteSequence.Name = "tb_noteSequence";
-            this.tb_noteSequence.Size = new System.Drawing.Size(503, 49);
+            this.tb_noteSequence.Size = new System.Drawing.Size(494, 49);
             this.tb_noteSequence.TabIndex = 7;
             this.tb_noteSequence.Text = "";
             this.tb_noteSequence.Click += new System.EventHandler(this.copyText);
@@ -121,7 +121,7 @@ namespace CSus2Editor
             // btn_seqUpdate
             // 
             this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_seqUpdate.Location = new System.Drawing.Point(509, 448);
+            this.btn_seqUpdate.Location = new System.Drawing.Point(500, 448);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
             this.btn_seqUpdate.Size = new System.Drawing.Size(72, 50);
             this.btn_seqUpdate.TabIndex = 8;
@@ -137,17 +137,6 @@ namespace CSus2Editor
             this.lbl_UIHLine1.Size = new System.Drawing.Size(600, 2);
             this.lbl_UIHLine1.TabIndex = 9;
             this.lbl_UIHLine1.Text = "label2";
-            // 
-            // btn_playSong
-            // 
-            this.btn_playSong.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_playSong.Location = new System.Drawing.Point(509, 377);
-            this.btn_playSong.Name = "btn_playSong";
-            this.btn_playSong.Size = new System.Drawing.Size(72, 45);
-            this.btn_playSong.TabIndex = 6;
-            this.btn_playSong.Text = "Play Song";
-            this.btn_playSong.UseVisualStyleBackColor = true;
-            this.btn_playSong.Click += new System.EventHandler(this.clickListen);
             // 
             // lbl_UIHLine2
             // 
@@ -170,7 +159,7 @@ namespace CSus2Editor
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(575, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -210,7 +199,6 @@ namespace CSus2Editor
             this.ms_options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.options_timeSignature,
             this.options_measureLines,
-            this.options_firstNote,
             this.options_followPlay,
             this.options_showCrewmate});
             this.ms_options.Name = "ms_options";
@@ -230,13 +218,6 @@ namespace CSus2Editor
             this.options_measureLines.Size = new System.Drawing.Size(181, 22);
             this.options_measureLines.Text = "Show Measure Lines";
             this.options_measureLines.Click += new System.EventHandler(this.clickMeasureLines);
-            // 
-            // options_firstNote
-            // 
-            this.options_firstNote.Name = "options_firstNote";
-            this.options_firstNote.Size = new System.Drawing.Size(181, 22);
-            this.options_firstNote.Text = "Play at First Note";
-            this.options_firstNote.Click += new System.EventHandler(this.clickFirstNote);
             // 
             // options_followPlay
             // 
@@ -333,19 +314,6 @@ namespace CSus2Editor
             this.lbl_UIVLine2.TabIndex = 18;
             this.lbl_UIVLine2.Text = "label2";
             // 
-            // loopCheckbox
-            // 
-            this.loopCheckbox.AutoSize = true;
-            this.loopCheckbox.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loopCheckbox.Location = new System.Drawing.Point(432, 378);
-            this.loopCheckbox.Margin = new System.Windows.Forms.Padding(2);
-            this.loopCheckbox.Name = "loopCheckbox";
-            this.loopCheckbox.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.loopCheckbox.Size = new System.Drawing.Size(50, 20);
-            this.loopCheckbox.TabIndex = 19;
-            this.loopCheckbox.Text = "Loop";
-            this.loopCheckbox.UseVisualStyleBackColor = true;
-            // 
             // lbl_UIVLine1
             // 
             this.lbl_UIVLine1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -383,31 +351,65 @@ namespace CSus2Editor
             0,
             0});
             // 
+            // btn_loop
+            // 
+            this.btn_loop.FlatAppearance.BorderSize = 0;
+            this.btn_loop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_loop.Location = new System.Drawing.Point(429, 377);
+            this.btn_loop.Name = "btn_loop";
+            this.btn_loop.Size = new System.Drawing.Size(45, 45);
+            this.btn_loop.TabIndex = 23;
+            this.btn_loop.UseVisualStyleBackColor = true;
+            this.btn_loop.Click += new System.EventHandler(this.clickLoop);
+            // 
+            // btn_playStart
+            // 
+            this.btn_playStart.FlatAppearance.BorderSize = 0;
+            this.btn_playStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_playStart.Location = new System.Drawing.Point(477, 377);
+            this.btn_playStart.Name = "btn_playStart";
+            this.btn_playStart.Size = new System.Drawing.Size(45, 45);
+            this.btn_playStart.TabIndex = 24;
+            this.btn_playStart.UseVisualStyleBackColor = true;
+            this.btn_playStart.Click += new System.EventHandler(this.clickListen);
+            // 
+            // btn_play
+            // 
+            this.btn_play.FlatAppearance.BorderSize = 0;
+            this.btn_play.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_play.Location = new System.Drawing.Point(525, 377);
+            this.btn_play.Name = "btn_play";
+            this.btn_play.Size = new System.Drawing.Size(45, 45);
+            this.btn_play.TabIndex = 25;
+            this.btn_play.UseVisualStyleBackColor = true;
+            this.btn_play.Click += new System.EventHandler(this.clickListen);
+            // 
             // pnl_buttons
             // 
             this.pnl_buttons.BackColor = System.Drawing.Color.White;
             this.pnl_buttons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnl_buttons.Location = new System.Drawing.Point(4, 27);
             this.pnl_buttons.Name = "pnl_buttons";
-            this.pnl_buttons.Size = new System.Drawing.Size(577, 343);
+            this.pnl_buttons.Size = new System.Drawing.Size(567, 343);
             this.pnl_buttons.TabIndex = 0;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 501);
+            this.ClientSize = new System.Drawing.Size(575, 501);
+            this.Controls.Add(this.btn_play);
+            this.Controls.Add(this.btn_playStart);
+            this.Controls.Add(this.btn_loop);
             this.Controls.Add(this.nud_insertColumn);
             this.Controls.Add(this.lbl_UIEditAfterColumn);
             this.Controls.Add(this.lbl_UIHLine2);
             this.Controls.Add(this.lbl_UIVLine1);
-            this.Controls.Add(this.loopCheckbox);
             this.Controls.Add(this.lbl_UIVLine2);
             this.Controls.Add(this.pnl_buttons);
             this.Controls.Add(this.btn_addColumns);
             this.Controls.Add(this.nud_addColumns);
             this.Controls.Add(this.lbl_UIAddColumns);
-            this.Controls.Add(this.btn_playSong);
             this.Controls.Add(this.lbl_UIHLine1);
             this.Controls.Add(this.btn_seqUpdate);
             this.Controls.Add(this.nud_noteInterval);
@@ -417,7 +419,7 @@ namespace CSus2Editor
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(600, 540);
+            this.MinimumSize = new System.Drawing.Size(591, 540);
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csus2 Music Box Editor";
@@ -440,7 +442,6 @@ namespace CSus2Editor
         private System.Windows.Forms.NumericUpDown nud_noteInterval;
         private System.Windows.Forms.Button btn_seqUpdate;
         private System.Windows.Forms.Label lbl_UIHLine1;
-        private System.Windows.Forms.Button btn_playSong;
         private System.Windows.Forms.Label lbl_UIHLine2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ms_File;
@@ -455,10 +456,8 @@ namespace CSus2Editor
         private System.Windows.Forms.ToolStripMenuItem ms_options;
         private System.Windows.Forms.ToolStripMenuItem options_timeSignature;
         private System.Windows.Forms.Label lbl_UIVLine2;
-        private System.Windows.Forms.CheckBox loopCheckbox;
         private System.Windows.Forms.Label lbl_UIVLine1;
         private System.Windows.Forms.ToolStripMenuItem file_loadSeq;
-        private System.Windows.Forms.ToolStripMenuItem options_firstNote;
         private System.Windows.Forms.ToolStripMenuItem options_showCrewmate;
         private System.Windows.Forms.ToolStripMenuItem options_measureLines;
         private System.Windows.Forms.ToolStripMenuItem cm_drawEmpty;
@@ -466,6 +465,9 @@ namespace CSus2Editor
         private System.Windows.Forms.Label lbl_UIEditAfterColumn;
         private System.Windows.Forms.NumericUpDown nud_insertColumn;
         private System.Windows.Forms.ToolStripMenuItem options_followPlay;
+        private System.Windows.Forms.Button btn_loop;
+        private System.Windows.Forms.Button btn_playStart;
+        private System.Windows.Forms.Button btn_play;
     }
 }
 

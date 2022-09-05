@@ -64,7 +64,7 @@ namespace CSus2Editor
         //This whole thing is sus
         public void drawCrewmate(bool alive) {
             //Check for draw cremate option
-            if (!mainWindow.drawCremate) return;
+            if (!mainWindow.drawCrewmate) return;
 
             //Generate crewmate at note
             if (alive) {

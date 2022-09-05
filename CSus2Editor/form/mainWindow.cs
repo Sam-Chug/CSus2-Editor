@@ -19,9 +19,6 @@ namespace CSus2Editor
 
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
-        private static string PLAY_SONG_TEXT = "Play Song";
-        private static string STOP_SONG_TEXT = "Stop Song";
-
         //FreeSO's weird messed up note index
         public string[] noteFSO = { "I", "C", "D", "E", "F", "G", "A", "B", "H" };
 
@@ -52,10 +49,9 @@ namespace CSus2Editor
             nud_noteInterval.Value = 5;
 
             //Default options
-            options_firstNote.Checked = firstNote;
             options_measureLines.Checked = measureLines;
             options_followPlay.Checked = followPlayBar;
-            options_followPlay.Checked = followPlayBar;
+            options_showCrewmate.Checked = drawCrewmate;
             cm_drawEmpty.Checked = drawCrewmateEmpty;
 
             //Focus sequencer
@@ -66,6 +62,15 @@ namespace CSus2Editor
 
             //Set tick to timer
             songTime.Tick += new EventHandler(nextTick);
+
+            btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
+            btn_play.BackgroundImageLayout = ImageLayout.Stretch;
+
+            btn_playStart.BackgroundImage = Image.FromFile(@".\res\media\playstart.png");
+            btn_playStart.BackgroundImageLayout = ImageLayout.Stretch;
+
+            btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
+            btn_loop.BackgroundImageLayout = ImageLayout.Stretch;
 
         }//End windowLoad
 
@@ -187,9 +192,12 @@ namespace CSus2Editor
         private void resizeForm(object sender, EventArgs e) {
             if (mainWindow.ActiveForm != null) {
                 //Process resizable controls
-                pnl_buttons.Width = mainWindow.ActiveForm.Width - 23;
+                pnl_buttons.Width = mainWindow.ActiveForm.ClientSize.Width - 8;
                 lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
                 lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+
+                btn_seqUpdate.Location = new Point(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 3, btn_seqUpdate.Location.Y);
+                tb_noteSequence.Size = new Size(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 9, mainWindow.ActiveForm.ClientSize.Height - tb_noteSequence.Location.Y - 4);
             }
         }//End resizeForm
 
@@ -208,7 +216,7 @@ namespace CSus2Editor
             if (songTime.Enabled) {
                 // Stop the song and reset the currently playing note's color.
                 songTime.Enabled = false;
-                btn_playSong.Text = PLAY_SONG_TEXT;
+                btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
                 if (songNote == 0) {
                     // The "previous note" is the final one.
                     noteCols[noteCols.Count - 1].setColorRTB(NoteUtils.beatColor(noteCols.Count - 1));
@@ -230,21 +238,27 @@ namespace CSus2Editor
             //Set interval (default 33ms)
             songTime.Interval = (int)nud_noteInterval.Value * 33;
 
-            //Find first non-empty note if option is enabled
-            if (!firstNote) goto EndFor;
+            //If playing from start, set start to 0
+            if (((Button)sender).Name == "btn_playStart") {
 
-            for (int i = 0; i < indexList.Length; i++) {
-                if (indexList[i] != 0) {
-                    //Set played note index to first non-empty note
-                    songNote = i;
-                    goto EndFor;
+                songNote = 0;
+            }
+            //If playing from first note, set start to first note
+            else {
+                for (int i = 0; i < indexList.Length; i++) {
+                    if (indexList[i] != 0) {
+                        //Set played note index to first non-empty note
+                        songNote = i;
+                        goto EndFor;
+                    }
                 }
             }
+
         EndFor: int endFor;
 
             //Start timer
             songTime.Enabled = true;
-            btn_playSong.Text = STOP_SONG_TEXT;
+            btn_play.BackgroundImage = Image.FromFile(@".\res\media\stop.png");
 
         }//End clickListen
 
@@ -283,7 +297,7 @@ namespace CSus2Editor
                 //Play note if not end of sequence
                 songNote++;
             }
-            else if (loopCheckbox.Checked) // Loop back to beginning
+            else if (loopSong) // Loop back to beginning
             {
                 songNote = 0;
             }
@@ -294,7 +308,7 @@ namespace CSus2Editor
                 noteCols[songNote].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
-                btn_playSong.Text = PLAY_SONG_TEXT;
+                btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
             }
 
             bool restEmpty = true;
@@ -305,14 +319,14 @@ namespace CSus2Editor
                 restEmpty &= (indexList[i] == 0);
             }
 
-            if (restEmpty && !loopCheckbox.Checked) //If all following notes empty, end song early
+            if (restEmpty && !loopSong) //If all following notes empty, end song early
             {
                 //Force back to default
                 noteCols[songNote - 1].setColorRTB(NoteUtils.beatColor(songNote - 1));
                 noteCols[songNote - 1].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
-                btn_playSong.Text = PLAY_SONG_TEXT;
+                btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
             }
 
             //If "follow play bar" otpion enabled, scroll bar moves to play bar
@@ -331,7 +345,7 @@ namespace CSus2Editor
 
             //Stop song if currently playing
             songTime.Enabled = false;
-            btn_playSong.Text = PLAY_SONG_TEXT;
+            btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
 
             //Focus sequencer
             focusSequencer();
@@ -628,5 +642,19 @@ namespace CSus2Editor
             pnl_buttons.Focus();
 
         }//End focusSequencer
+
+        bool loopSong = false;
+
+        private void clickLoop(object sender, EventArgs e) {
+
+            loopSong ^= true;
+
+            if (loopSong) {
+                btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeaton.png");
+            }
+            else {
+                btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
+            }
+        }
     }
 }
