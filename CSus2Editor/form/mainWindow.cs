@@ -267,6 +267,9 @@ namespace CSus2Editor
             //Color current column
             noteCols[songNote].setColorRTB(Color.LemonChiffon);
 
+            //Get interval if changed while playing
+            songTime.Interval = (int)nud_noteInterval.Value * 33;
+
             // Change the previous note to its original color.
             if (songNote == 0) {
                 // The "previous note" is the final one.
