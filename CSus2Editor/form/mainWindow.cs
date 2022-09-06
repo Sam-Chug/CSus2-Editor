@@ -36,6 +36,7 @@ namespace CSus2Editor
         //Time signature vars
         public static int beats = 4;
         public static int quarters = 4;
+        public static int offset = 0;
 
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();

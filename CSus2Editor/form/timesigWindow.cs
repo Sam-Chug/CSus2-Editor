@@ -28,6 +28,7 @@ namespace CSus2Editor
             //Set default values to current beat and quarter values
             nud_beats.Value = mainWindow.beats;
             nud_quarters.Value = mainWindow.quarters;
+            nud_offset.Value = mainWindow.offset;
 
         }//End formLoad
 
@@ -37,6 +38,7 @@ namespace CSus2Editor
             //Send values
             mainWindow.beats = (int)nud_beats.Value;
             mainWindow.quarters = (int)nud_quarters.Value;
+            mainWindow.offset = (int)nud_offset.Value;
 
             //Get main window
             mainWindow main = this.Owner as mainWindow;
@@ -56,5 +58,9 @@ namespace CSus2Editor
             lbl_newSig.Text = "Signature: " + nud_beats.Value + "/" + nud_quarters.Value;
 
         }//End changeNud
+
+        private void changeNud(object sender, MouseEventArgs e) {
+
+        }
     }
 }

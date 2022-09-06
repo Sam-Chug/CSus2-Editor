@@ -36,8 +36,11 @@
             this.lbl_UINotesPerBeat = new System.Windows.Forms.Label();
             this.btn_setNewSig = new System.Windows.Forms.Button();
             this.lbl_newSig = new System.Windows.Forms.Label();
+            this.nud_offset = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nud_quarters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_beats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_offset)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_UIPickSig
@@ -107,7 +110,7 @@
             // 
             this.lbl_UIBeats.AutoSize = true;
             this.lbl_UIBeats.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_UIBeats.Location = new System.Drawing.Point(55, 26);
+            this.lbl_UIBeats.Location = new System.Drawing.Point(55, 27);
             this.lbl_UIBeats.Name = "lbl_UIBeats";
             this.lbl_UIBeats.Size = new System.Drawing.Size(35, 15);
             this.lbl_UIBeats.TabIndex = 3;
@@ -117,7 +120,7 @@
             // 
             this.lbl_UINotesPerBeat.AutoSize = true;
             this.lbl_UINotesPerBeat.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_UINotesPerBeat.Location = new System.Drawing.Point(55, 50);
+            this.lbl_UINotesPerBeat.Location = new System.Drawing.Point(55, 53);
             this.lbl_UINotesPerBeat.Name = "lbl_UINotesPerBeat";
             this.lbl_UINotesPerBeat.Size = new System.Drawing.Size(83, 15);
             this.lbl_UINotesPerBeat.TabIndex = 4;
@@ -144,11 +147,41 @@
             this.lbl_newSig.TabIndex = 6;
             this.lbl_newSig.Text = "new-sig";
             // 
+            // nud_offset
+            // 
+            this.nud_offset.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud_offset.Location = new System.Drawing.Point(4, 76);
+            this.nud_offset.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.nud_offset.Minimum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            -2147483648});
+            this.nud_offset.Name = "nud_offset";
+            this.nud_offset.Size = new System.Drawing.Size(49, 23);
+            this.nud_offset.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(55, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Column Offset";
+            // 
             // timesigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 77);
+            this.ClientSize = new System.Drawing.Size(264, 103);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nud_offset);
             this.Controls.Add(this.lbl_newSig);
             this.Controls.Add(this.btn_setNewSig);
             this.Controls.Add(this.lbl_UINotesPerBeat);
@@ -164,6 +197,7 @@
             this.Load += new System.EventHandler(this.formLoad);
             ((System.ComponentModel.ISupportInitialize)(this.nud_quarters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_beats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_offset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +212,7 @@
         private System.Windows.Forms.Label lbl_UINotesPerBeat;
         private System.Windows.Forms.Button btn_setNewSig;
         private System.Windows.Forms.Label lbl_newSig;
+        private System.Windows.Forms.NumericUpDown nud_offset;
+        private System.Windows.Forms.Label label1;
     }
 }

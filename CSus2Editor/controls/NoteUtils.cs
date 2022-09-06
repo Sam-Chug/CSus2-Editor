@@ -20,20 +20,23 @@ namespace CSus2Editor
 
             int quarters = mainWindow.quarters;
             int beats = mainWindow.beats;
+            int offset = -mainWindow.offset;
+
+            int index = i + 1 + offset;
 
             //Check if measure lines are enabled
             if (!mainWindow.measureLines) return c;
 
             //Quarters
-            if ((i + 1) % quarters == 1) {
+            if (index % quarters == 1) {
                 c = Color.LightBlue;
             }
             //Beats
-            if ((i + 1) % (beats * quarters) == 1) {
+            if (index % (beats * quarters) == 1) {
                 c = Color.LightCoral;
             }
             //Measures
-            if ((i + 1) % (beats * beats * quarters) == 1) {
+            if (index % (beats * beats * quarters) == 1) {
                 c = Color.Plum;
             }
 
