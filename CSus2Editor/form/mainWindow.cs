@@ -17,6 +17,7 @@ namespace CSus2Editor
         //So I dont forget to change it in the texts again lmao
         public static string version = "v1.2.2";
 
+        //Note column list
         public static List<NoteColumn> noteCols = new List<NoteColumn>();
 
         //FreeSO's weird messed up note index
@@ -63,15 +64,23 @@ namespace CSus2Editor
             //Set tick to timer
             songTime.Tick += new EventHandler(nextTick);
 
-            btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
-            btn_play.BackgroundImageLayout = ImageLayout.Stretch;
+            //Disable summary textbox
+            ControlExtensions.DisableRTB(rtb_seqSummary, pnl_UISummary);
 
-            btn_playStart.BackgroundImage = Image.FromFile(@".\res\media\playstart.png");
-            btn_playStart.BackgroundImageLayout = ImageLayout.Stretch;
+            //Draw images for media buttons
+            {
+                //Play
+                btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
+                btn_play.BackgroundImageLayout = ImageLayout.Stretch;
 
-            btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
-            btn_loop.BackgroundImageLayout = ImageLayout.Stretch;
+                //Play from start
+                btn_playStart.BackgroundImage = Image.FromFile(@".\res\media\playstart.png");
+                btn_playStart.BackgroundImageLayout = ImageLayout.Stretch;
 
+                //Loop
+                btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
+                btn_loop.BackgroundImageLayout = ImageLayout.Stretch;
+            }
         }//End windowLoad
 
         //Call whenever adding or removing columns
@@ -126,59 +135,47 @@ namespace CSus2Editor
         //Update note sequence
         private void clickUpdate(object sender, EventArgs e) {
 
-            //Sequence temp
-            string sequence = "";
+            //Get and write note sequence text
+            tb_noteSequence.Text = NoteUtils.sequenceText((int)nud_noteInterval.Value);
 
-            //Note intervals
-            int masterInt = (int)nud_noteInterval.Value;
-            int noteInt = 0;
-
-            //If searching for next real note
-            bool parseNext = true;
-
-            for (int i = 0; i < indexList.Length; i++) {
-
-                //Add note at end of sequence to preserve master interval
-                if (i == indexList.Length - 1) {
-                    sequence += noteFSO[indexList[i]] + masterInt;
-                    goto ExitFor;
-                }
-                //If note parse enabled, write next real note to string
-                if (parseNext) {
-
-                    //Find and write correct note, then disable parse
-                    sequence += noteFSO[indexList[i]];
-                    noteInt += masterInt;
-                    parseNext = false;
-                }
-                //Cutoff long interval at second-to-last note, to preserve final note's master interval
-                if (i == indexList.Length - 2) {
-                    sequence += noteInt;
-                    noteInt = 0;
-                    goto SkipOneLoop;
-                }
-                //If real note at next location, write interval after present note
-                if (i + 1 < indexList.Length) {
-
-                    if (indexList[i + 1] != 0) {
-                        //Write interval and reset to 0
-                        sequence += noteInt;
-                        noteInt = 0;
-                        //Enable parse for next real note
-                        parseNext = true;
-
-                    }
-                    else {
-                        noteInt += masterInt;
-                    }
-                }
-            SkipOneLoop: int skipOneLoop;
-            }
-        ExitFor: int exitFor;
-
-            tb_noteSequence.Text = sequence;
+            //Get and write sequence summary text
+            summaryText();
 
         }//End clickUpdate
+
+        //Write sequence summary text
+        private void summaryText() {
+
+            //Clear previous entry
+            rtb_seqSummary.Clear();
+
+            //Check if length of sequence doesn't pass ingame limits (1024 characters)
+            rtb_seqSummary.AppendText("Length: ");
+
+            if (tb_noteSequence.Text.Length > 1024) {
+                rtb_seqSummary.SelectionColor = Color.Red;
+            }
+            else {
+                rtb_seqSummary.SelectionColor = Color.Green;
+            }
+
+            rtb_seqSummary.AppendText(tb_noteSequence.Text.Length + " characters");
+            rtb_seqSummary.SelectionColor = Color.Black;
+            rtb_seqSummary.AppendText("\nPlayback: ");
+
+            //Check if sequence will play back correctly in game
+            if (NoteUtils.auditSequence((int)nud_noteInterval.Value).Count != 0) {
+
+                rtb_seqSummary.SelectionColor = Color.Red;
+                rtb_seqSummary.AppendText("Error Found" +
+                                        "\n(Click for more info)");
+            }
+            else {
+                rtb_seqSummary.SelectionColor = Color.Green;
+                rtb_seqSummary.AppendText("Optimal");
+            }
+
+        }//End summaryText
 
         //Copy sequence to clipboard
         private void copyText(object sender, EventArgs e) {
@@ -191,20 +188,9 @@ namespace CSus2Editor
         //Upon resizing, fit controls to window
         private void resizeForm(object sender, EventArgs e) {
             if (mainWindow.ActiveForm != null) {
-                //Only use control's size variables, other numbers only for adding margins
 
                 //Note column holder and horizontal lines
                 pnl_buttons.Width = mainWindow.ActiveForm.ClientSize.Width - 8;
-                //lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
-                //lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
-                //lbl_UIVLine3.Size = new Size(2, (mainWindow.ActiveForm.ClientSize.Height - lbl_UIVLine3.Location.X));
-
-
-                //Sequence output size
-                /*tb_noteSequence.Size = new Size(mainWindow.ActiveForm.ClientSize.Width -
-                                               (mainWindow.ActiveForm.ClientSize.Width - lbl_UIVLine3.Location.X) - btn_seqUpdate.Width - 9,
-                                                mainWindow.ActiveForm.ClientSize.Height -
-                                                tb_noteSequence.Location.Y - 4);*/
             }
         }//End resizeForm
 
@@ -462,7 +448,7 @@ namespace CSus2Editor
         public void loadSequence(string seq) {
 
             if (NoteUtils.loadValidity(seq)) return;
-            
+
             string noteParse = "";
 
             List<string> noteHolder = new List<string>();
@@ -603,5 +589,30 @@ namespace CSus2Editor
                 btn_loop.BackgroundImage = Image.FromFile(@".\res\media\repeatoff.png");
             }
         }//End clickLoop
+
+        //Clicking on sequence summary opens a window showing error columns
+        private void clickSummary(object sender, EventArgs e) {
+
+            //Get list of bad columns
+            List<int> errorList = NoteUtils.auditSequence((int)nud_noteInterval.Value);
+            //String for messagebox
+            string errorMessage = "";
+
+            //For each bad column
+            if (errorList.Count != 0) {
+
+                //Format "s" based on count
+                if (errorList.Count == 1) errorMessage = "Error found at: ";
+                else errorMessage = "Errors found at:";
+
+                //Add column number plus formatted text
+                for (int i = 0; i < errorList.Count; i++) {
+                    errorMessage += "\nColumn: " + (errorList[i] + 1);
+                }
+
+                //Show messagebox
+                MessageBox.Show(errorMessage, "Errors");
+            }
+        }//End clickSummary
     }
 }

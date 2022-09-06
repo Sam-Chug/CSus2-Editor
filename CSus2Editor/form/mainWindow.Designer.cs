@@ -60,20 +60,20 @@ namespace CSus2Editor
             this.pnl_buttons = new CSus2Editor.PanelNoScrollOnFocus();
             this.label2 = new System.Windows.Forms.Label();
             this.rtb_seqSummary = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnl_UIMediaButton = new System.Windows.Forms.Panel();
+            this.pnl_UIInterval = new System.Windows.Forms.Panel();
+            this.pnl_UISummary = new System.Windows.Forms.Panel();
+            this.pnl_UINoteSequence = new System.Windows.Forms.Panel();
+            this.pnl_UIEditColumn = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nud_noteInterval)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_addColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_insertColumn)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.pnl_UIMediaButton.SuspendLayout();
+            this.pnl_UIInterval.SuspendLayout();
+            this.pnl_UISummary.SuspendLayout();
+            this.pnl_UINoteSequence.SuspendLayout();
+            this.pnl_UIEditColumn.SuspendLayout();
             this.SuspendLayout();
             // 
             // tb_noteSequence
@@ -82,7 +82,7 @@ namespace CSus2Editor
             this.tb_noteSequence.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_noteSequence.Location = new System.Drawing.Point(3, 23);
             this.tb_noteSequence.Name = "tb_noteSequence";
-            this.tb_noteSequence.Size = new System.Drawing.Size(339, 49);
+            this.tb_noteSequence.Size = new System.Drawing.Size(339, 55);
             this.tb_noteSequence.TabIndex = 7;
             this.tb_noteSequence.Text = "";
             this.tb_noteSequence.Click += new System.EventHandler(this.copyText);
@@ -134,7 +134,7 @@ namespace CSus2Editor
             this.btn_seqUpdate.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_seqUpdate.Location = new System.Drawing.Point(344, 22);
             this.btn_seqUpdate.Name = "btn_seqUpdate";
-            this.btn_seqUpdate.Size = new System.Drawing.Size(67, 51);
+            this.btn_seqUpdate.Size = new System.Drawing.Size(67, 56);
             this.btn_seqUpdate.TabIndex = 8;
             this.btn_seqUpdate.Text = "Refresh Output";
             this.btn_seqUpdate.UseVisualStyleBackColor = true;
@@ -389,81 +389,82 @@ namespace CSus2Editor
             this.rtb_seqSummary.Location = new System.Drawing.Point(3, 23);
             this.rtb_seqSummary.Name = "rtb_seqSummary";
             this.rtb_seqSummary.ReadOnly = true;
-            this.rtb_seqSummary.Size = new System.Drawing.Size(141, 49);
+            this.rtb_seqSummary.Size = new System.Drawing.Size(141, 55);
             this.rtb_seqSummary.TabIndex = 28;
             this.rtb_seqSummary.Text = "";
+            this.rtb_seqSummary.Click += new System.EventHandler(this.clickSummary);
             // 
-            // panel1
+            // pnl_UIMediaButton
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.btn_loop);
-            this.panel1.Controls.Add(this.btn_playStart);
-            this.panel1.Controls.Add(this.btn_play);
-            this.panel1.Location = new System.Drawing.Point(423, 373);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(150, 52);
-            this.panel1.TabIndex = 29;
+            this.pnl_UIMediaButton.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UIMediaButton.Controls.Add(this.btn_loop);
+            this.pnl_UIMediaButton.Controls.Add(this.btn_playStart);
+            this.pnl_UIMediaButton.Controls.Add(this.btn_play);
+            this.pnl_UIMediaButton.Location = new System.Drawing.Point(423, 373);
+            this.pnl_UIMediaButton.Name = "pnl_UIMediaButton";
+            this.pnl_UIMediaButton.Size = new System.Drawing.Size(150, 52);
+            this.pnl_UIMediaButton.TabIndex = 29;
             // 
-            // panel2
+            // pnl_UIInterval
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.nud_noteInterval);
-            this.panel2.Location = new System.Drawing.Point(312, 373);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(108, 52);
-            this.panel2.TabIndex = 30;
+            this.pnl_UIInterval.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UIInterval.Controls.Add(this.label1);
+            this.pnl_UIInterval.Controls.Add(this.nud_noteInterval);
+            this.pnl_UIInterval.Location = new System.Drawing.Point(312, 373);
+            this.pnl_UIInterval.Name = "pnl_UIInterval";
+            this.pnl_UIInterval.Size = new System.Drawing.Size(108, 52);
+            this.pnl_UIInterval.TabIndex = 30;
             // 
-            // panel3
+            // pnl_UISummary
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.rtb_seqSummary);
-            this.panel3.Location = new System.Drawing.Point(423, 428);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 78);
-            this.panel3.TabIndex = 31;
+            this.pnl_UISummary.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_UISummary.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UISummary.Controls.Add(this.label2);
+            this.pnl_UISummary.Controls.Add(this.rtb_seqSummary);
+            this.pnl_UISummary.Location = new System.Drawing.Point(423, 428);
+            this.pnl_UISummary.Name = "pnl_UISummary";
+            this.pnl_UISummary.Size = new System.Drawing.Size(150, 84);
+            this.pnl_UISummary.TabIndex = 31;
             // 
-            // panel4
+            // pnl_UINoteSequence
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.lbl_UINoteSequence);
-            this.panel4.Controls.Add(this.tb_noteSequence);
-            this.panel4.Controls.Add(this.btn_seqUpdate);
-            this.panel4.Location = new System.Drawing.Point(4, 428);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(416, 78);
-            this.panel4.TabIndex = 32;
+            this.pnl_UINoteSequence.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UINoteSequence.Controls.Add(this.lbl_UINoteSequence);
+            this.pnl_UINoteSequence.Controls.Add(this.tb_noteSequence);
+            this.pnl_UINoteSequence.Controls.Add(this.btn_seqUpdate);
+            this.pnl_UINoteSequence.Location = new System.Drawing.Point(4, 428);
+            this.pnl_UINoteSequence.Name = "pnl_UINoteSequence";
+            this.pnl_UINoteSequence.Size = new System.Drawing.Size(416, 84);
+            this.pnl_UINoteSequence.TabIndex = 32;
             // 
-            // panel5
+            // pnl_UIEditColumn
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.lbl_UIAddColumns);
-            this.panel5.Controls.Add(this.nud_addColumns);
-            this.panel5.Controls.Add(this.lbl_UIEditAfterColumn);
-            this.panel5.Controls.Add(this.nud_insertColumn);
-            this.panel5.Controls.Add(this.btn_addColumns);
-            this.panel5.Location = new System.Drawing.Point(4, 373);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(305, 52);
-            this.panel5.TabIndex = 33;
+            this.pnl_UIEditColumn.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_UIEditColumn.Controls.Add(this.lbl_UIAddColumns);
+            this.pnl_UIEditColumn.Controls.Add(this.nud_addColumns);
+            this.pnl_UIEditColumn.Controls.Add(this.lbl_UIEditAfterColumn);
+            this.pnl_UIEditColumn.Controls.Add(this.nud_insertColumn);
+            this.pnl_UIEditColumn.Controls.Add(this.btn_addColumns);
+            this.pnl_UIEditColumn.Location = new System.Drawing.Point(4, 373);
+            this.pnl_UIEditColumn.Name = "pnl_UIEditColumn";
+            this.pnl_UIEditColumn.Size = new System.Drawing.Size(305, 52);
+            this.pnl_UIEditColumn.TabIndex = 33;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 510);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(577, 516);
+            this.Controls.Add(this.pnl_UIEditColumn);
+            this.Controls.Add(this.pnl_UINoteSequence);
+            this.Controls.Add(this.pnl_UISummary);
+            this.Controls.Add(this.pnl_UIInterval);
+            this.Controls.Add(this.pnl_UIMediaButton);
             this.Controls.Add(this.pnl_buttons);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(593, 549);
+            this.MinimumSize = new System.Drawing.Size(593, 555);
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csus2 Music Box Editor";
@@ -474,14 +475,14 @@ namespace CSus2Editor
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_addColumns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_insertColumn)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
+            this.pnl_UIMediaButton.ResumeLayout(false);
+            this.pnl_UIInterval.ResumeLayout(false);
+            this.pnl_UIInterval.PerformLayout();
+            this.pnl_UISummary.ResumeLayout(false);
+            this.pnl_UISummary.PerformLayout();
+            this.pnl_UINoteSequence.ResumeLayout(false);
+            this.pnl_UINoteSequence.PerformLayout();
+            this.pnl_UIEditColumn.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -518,11 +519,11 @@ namespace CSus2Editor
         private System.Windows.Forms.Button btn_play;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.RichTextBox rtb_seqSummary;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnl_UIMediaButton;
+        private System.Windows.Forms.Panel pnl_UIInterval;
+        private System.Windows.Forms.Panel pnl_UISummary;
+        private System.Windows.Forms.Panel pnl_UINoteSequence;
+        private System.Windows.Forms.Panel pnl_UIEditColumn;
     }
 }
 
