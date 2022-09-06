@@ -369,6 +369,7 @@ namespace CSus2Editor
             this.pnl_buttons.Name = "pnl_buttons";
             this.pnl_buttons.Size = new System.Drawing.Size(569, 343);
             this.pnl_buttons.TabIndex = 0;
+            this.pnl_buttons.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrollSequencer);
             // 
             // label2
             // 

@@ -9,6 +9,7 @@ using System.CodeDom.Compiler;
 using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Reflection;
+using System.Data.Common;
 
 namespace CSus2Editor
 {
@@ -127,6 +128,9 @@ namespace CSus2Editor
             pnl_buttons.VerticalScroll.Visible = false;
             pnl_buttons.AutoScroll = true;
 
+            //Set center scroll color
+            scrollSequencer(null, null);
+
             //Set min/max for editing columns
             addColumnRange();
 
@@ -191,6 +195,9 @@ namespace CSus2Editor
 
                 //Note column holder and horizontal lines
                 pnl_buttons.Width = mainWindow.ActiveForm.ClientSize.Width - 8;
+
+                //Get new center column position
+                scrollSequencer(null, null);
             }
         }//End resizeForm
 
@@ -214,10 +221,12 @@ namespace CSus2Editor
                     // The "previous note" is the final one.
                     noteCols[noteCols.Count - 1].setColorRTB(NoteUtils.beatColor(noteCols.Count - 1));
                     noteCols[noteCols.Count - 1].drawCrewmate(false);
+                    scrollSequencer(null, null);
                 }
                 else {
                     noteCols[songNote - 1].setColorRTB(NoteUtils.beatColor(songNote - 1));
                     noteCols[songNote - 1].drawCrewmate(false);
+                    scrollSequencer(null, null);
                 }
                 return;
             }
@@ -238,13 +247,9 @@ namespace CSus2Editor
             }
             //If playing from first note, set start to first note
             else {
-                for (int i = 0; i < indexList.Length; i++) {
-                    if (indexList[i] != 0) {
-                        //Set played note index to first non-empty note
-                        songNote = i;
-                        goto EndFor;
-                    }
-                }
+
+                songNote = centerColumn();
+
             }
 
         EndFor: int endFor;
@@ -253,10 +258,19 @@ namespace CSus2Editor
             songTime.Enabled = true;
             btn_play.BackgroundImage = Image.FromFile(@".\res\media\stop.png");
 
+            //Set center column
+            scrollSequencer(null, null);
+
         }//End clickListen
 
         //Tick process for timer to play song
         private void nextTick(object Sender, EventArgs e) {
+
+            //If "follow play bar" otpion enabled, scroll bar moves to play bar
+            if (followPlayBar) {
+                pnl_buttons.HorizontalScroll.Value = moveScrollBar(songNote);
+            }
+
             //Color current column
             noteCols[songNote].setColorRTB(Color.LemonChiffon);
 
@@ -304,6 +318,7 @@ namespace CSus2Editor
                 noteCols[songNote].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
+                scrollSequencer(null, null);
                 btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
             }
 
@@ -322,14 +337,9 @@ namespace CSus2Editor
                 noteCols[songNote - 1].drawCrewmate(false);
                 //Stop timer
                 songTime.Enabled = false;
+                scrollSequencer(null, null);
                 btn_play.BackgroundImage = Image.FromFile(@".\res\media\play.png");
             }
-
-            //If "follow play bar" otpion enabled, scroll bar moves to play bar
-            if (followPlayBar) {
-                pnl_buttons.HorizontalScroll.Value = moveScrollBar(songNote);
-            }
-
         }//End next tick
 
         //Add specified number of new columns
@@ -614,5 +624,32 @@ namespace CSus2Editor
                 MessageBox.Show(errorMessage, "Errors");
             }
         }//End clickSummary
+
+        //Set color of center column
+        private void scrollSequencer(object sender, ScrollEventArgs e) {
+
+            noteCols[previousColumn].setColorRTB(NoteUtils.beatColor(previousColumn));
+
+            if (!songTime.Enabled) {
+                noteCols[centerColumn()].setColorRTB(Color.Cornsilk);
+            }
+        }//End scrollSequencer
+
+        int previousColumn;
+
+        //Return number of column in center of screen
+        private int centerColumn() {
+
+            //Scroll percentage of scrollbar
+            double scrollP = (double)pnl_buttons.HorizontalScroll.Value / (double)pnl_buttons.HorizontalScroll.Maximum;
+
+            //Column in center of screen
+            int pos = (int)(scrollP * noteCols.Count) + (int)((double)pnl_buttons.Width / 72d) + 1;
+
+            previousColumn = pos;
+
+            return pos;
+
+        }//End centerColumn
     }
 }
