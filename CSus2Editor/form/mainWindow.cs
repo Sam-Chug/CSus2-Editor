@@ -195,14 +195,16 @@ namespace CSus2Editor
 
                 //Note column holder and horizontal lines
                 pnl_buttons.Width = mainWindow.ActiveForm.ClientSize.Width - 8;
-                lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
-                lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+                //lbl_UIHLine1.Width = mainWindow.ActiveForm.Width;
+                //lbl_UIHLine2.Width = mainWindow.ActiveForm.Width;
+                //lbl_UIVLine3.Size = new Size(2, (mainWindow.ActiveForm.ClientSize.Height - lbl_UIVLine3.Location.X));
 
-                //Generate sequence location
-                btn_seqUpdate.Location = new Point(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 3, btn_seqUpdate.Location.Y);
-                
+
                 //Sequence output size
-                tb_noteSequence.Size = new Size(mainWindow.ActiveForm.ClientSize.Width - btn_seqUpdate.Width - 9, mainWindow.ActiveForm.ClientSize.Height - tb_noteSequence.Location.Y - 4);
+                /*tb_noteSequence.Size = new Size(mainWindow.ActiveForm.ClientSize.Width -
+                                               (mainWindow.ActiveForm.ClientSize.Width - lbl_UIVLine3.Location.X) - btn_seqUpdate.Width - 9,
+                                                mainWindow.ActiveForm.ClientSize.Height -
+                                                tb_noteSequence.Location.Y - 4);*/
             }
         }//End resizeForm
 
