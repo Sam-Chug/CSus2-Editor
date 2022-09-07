@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controls\ControlColors.cs" />
     <Compile Include="controls\ControlExtensions.cs" />
     <Compile Include="controls\NoteUtils.cs" />
     <Compile Include="controls\Crewmate.cs">

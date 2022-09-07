@@ -38,6 +38,9 @@ namespace CSus2Editor
         public static int quarters = 4;
         public static int offset = 0;
 
+        //Loop check
+        bool loopSong = false;
+
         //Sound player for playing note sounds
         public static SoundPlayer notes = new SoundPlayer();
 
@@ -241,19 +244,12 @@ namespace CSus2Editor
             //Set interval (default 33ms)
             songTime.Interval = (int)nud_noteInterval.Value * 33;
 
-            //If playing from start, set start to 0
-            if (((Button)sender).Name == "btn_playStart") {
+            //If pressing play from start, play from start
+            if (((Button)sender).Name == "btn_playStart") songNote = 0;
+            //If pressing play, start from column at center of screen
+            else songNote = centerColumn();
 
-                songNote = 0;
-            }
-            //If playing from first note, set start to first note
-            else {
-
-                songNote = centerColumn();
-
-            }
-
-        EndFor: int endFor;
+            EndFor: int endFor;
 
             //Start timer
             songTime.Enabled = true;
@@ -585,9 +581,6 @@ namespace CSus2Editor
 
         }//End focusSequencer
 
-        //Loop check
-        bool loopSong = false;
-
         //Set loop button's image based on looping disabled/enabled
         private void clickLoop(object sender, EventArgs e) {
 
@@ -632,10 +625,11 @@ namespace CSus2Editor
             noteCols[previousColumn].setColorRTB(NoteUtils.beatColor(previousColumn));
 
             if (!songTime.Enabled) {
-                noteCols[centerColumn()].setColorRTB(Color.Cornsilk);
+                noteCols[centerColumn()].setColorRTB(Color.LemonChiffon);
             }
         }//End scrollSequencer
 
+        //Variable for previous center column
         int previousColumn;
 
         //Return number of column in center of screen
@@ -648,7 +642,6 @@ namespace CSus2Editor
             int pos = (int)(scrollP * noteCols.Count) + (int)((double)pnl_buttons.Width / 72d) + 1;
 
             previousColumn = pos;
-
             return pos;
 
         }//End centerColumn
