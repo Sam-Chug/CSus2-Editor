@@ -23,13 +23,6 @@ namespace CSus2Editor
 
         }//End clickAbout
 
-        //On clicking view help under help
-        private void clickViewHelp(object sender, EventArgs e) {
-            helpWindow help = new helpWindow();
-            help.Show();
-
-        }//End clickViewHelp
-
         //On clicking exit under file
         private void clickExit(object sender, EventArgs e) {
             //Prompt user if sure to exit
@@ -38,6 +31,13 @@ namespace CSus2Editor
                 Application.Exit();
             }
         }//End clickExit
+
+        //On clicking view help under help
+        private void clickViewHelp(object sender, EventArgs e) {
+            helpWindow help = new helpWindow();
+            help.ShowDialog(this);
+
+        }//End clickViewHelp
 
         //Open time signature window
         private void clickTimeSignature(object sender, EventArgs e) {
