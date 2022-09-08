@@ -286,7 +286,6 @@ namespace CSus2Editor
             0,
             0,
             0});
-            this.nud_addColumns.KeyDown += new System.Windows.Forms.KeyEventHandler(this.addColumnsEnter);
             // 
             // btn_addColumns
             // 

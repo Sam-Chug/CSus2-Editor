@@ -434,14 +434,6 @@ namespace CSus2Editor
             }
         }//End clickAddColumns
 
-        //Pressing enter on add columns box (QoL)
-        private void addColumnsEnter(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                //Add new columns
-                clickAddColumns(null, e);
-            }
-        }//End addColumnsEnter
-
         //Refresh columns after changing time signature
         public void refreshColumns() {
 
