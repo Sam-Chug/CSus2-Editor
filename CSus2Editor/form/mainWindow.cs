@@ -614,6 +614,9 @@ namespace CSus2Editor
         //Set color of center column
         private void scrollSequencer(object sender, ScrollEventArgs e) {
 
+            //Fix for crashing when maximizing window
+            if (this.Width >= indexList.Length * noteCols[0].Width) return;
+
             noteCols[previousColumn].setColorRTB(NoteUtils.beatColor(previousColumn));
 
             if (!songTime.Enabled) {
